@@ -44,6 +44,7 @@ end
 
 gem 'jquery-rails'
 gem 'devise'
+gem 'rubocop', '~> 0.74.0', require: false
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
