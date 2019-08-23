@@ -1,1 +1,28 @@
 @import "bootstrap";
+
+#gameboard {
+  margin: auto;
+}
+
+#gameboard td {
+  width: 80px;
+  height: 80px;
+  padding: 0;
+}
+
+#gameboard tr, #gameboard td {
+  border: 1px solid black;
+}
+
+#gameboard tr:nth-child(even) td:nth-child(odd), #gameboard tr:nth-child(odd) td:nth-child(even) {
+  background-color: #000000;
+}
+
+h1 {
+  text-align: center;
+  font-size: 24;
+}
+
+.game-nav-item {
+  text-align: center;
+}
