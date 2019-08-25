@@ -11,13 +11,12 @@ RSpec.describe GamesController, type: :controller do
   describe "games#update action" do 
     it "should update the white_player_id of available games to the current user" do 
       #arrange
-      user = FactoryBot.create(:user)
-      user2 = FactoryBot.create(:user)
-      my_game = FactoryBot.create(:game, white_player_id: user.id)
+      player = FactoryBot.create(:player)
+      player2 = FactoryBot.create(:player)
+      my_game = FactoryBot.create(:game, white_player_id: player.id, black_player_id: nil, game_id: 1)
 
       #act
-      #result = my_game.update
-      patch :update, params: {black_player_id: user2.id}
+      result = my_game.update
 
       #assert
 

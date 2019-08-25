@@ -13,4 +13,8 @@ FactoryBot.define do
     game_id         {|n| n}
   end
 
+ factory :player do 
+  player_id {|n| n}
+ end
+
 end
