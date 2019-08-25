@@ -9,19 +9,19 @@ class Game < ApplicationRecord
   end
 
 
-  def available_games
+  #def available_games
     #call all games
-    Games.each do |game|
+    #Games.each do |game|
       #look up each game by the game_id
-      @game = Game.find_by_id(params[:id])
+      #@game = Game.find_by_id(params[:id])
       #test if black player id is nil and return results
-      if black_player_id == nil
-        puts "Game number #{game.game_id} is ready to play!"
-      else
-        puts "Game Unavailable"
-      end
-    end
-  end
+      #if black_player_id == nil
+        #puts "Game number #{game.game_id} is ready to play!"
+      #else
+        #puts "Game Unavailable"
+      #end
+    #end
+  #end
 
   
 end
