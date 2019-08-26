@@ -2,14 +2,15 @@ class Game < ApplicationRecord
   has_many :players
   has_many :pieces
 
-  belongs_to :user
-
+  scope :available_games, -> {where(user_id => current_user.id)}
 
   #sort available games for user to join
   #call using Game.available_games(user_id)
   def self.available_games(user_id)
     #set user_id equal to the current user
     user_id = current_user.user_id
+    #test if user_id is set to current_user
+    puts user_id
     #call all games
     @games = Game.all
     #iterate through all games
