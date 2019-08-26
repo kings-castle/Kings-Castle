@@ -12,4 +12,10 @@ class GamesController < ApplicationController
 
 	def show
 	end
+
+  private
+
+  def game_params
+    params.require(:game).permit(:white_player_id, :black_player_id, :game_id)
+  end
 end
