@@ -1,9 +1,14 @@
 <h1>Welcome to our Awesome Chess App</h1>
 
 
-<!-- Include header to introduce available games
+<!-- Include header to introduce available games -->
 
-      Call available games method
-      display the game_id of all available games
-      display the white_player_id email address of all available games as the opponent
-      -->
+<h2> Join a Game </h2>
+
+  <!-- Load all games -->
+  <% @games.each do |game| %>
+  <!-- Call available games method for the current user -->
+  <!-- Display the game_id of all available games -->
+    <%= game.available_games %>
+  <!-- Display the user.email of the white_player_id user as the opponent -->
+  <% end %>
