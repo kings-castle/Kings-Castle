@@ -8,8 +8,9 @@ class Game < ApplicationRecord
   def self.available_games(user_id)
     #set user_id equal to the current user
     #user_id = current_user.id
-    #iterate through all games
+    #call all games
     @games = Game.all
+    #iterate through all games
     @games.each do |game|
       #pull any game that has a black_player_id of nil and
       #white_player_id does not equal the user
