@@ -5,14 +5,18 @@ class Game < ApplicationRecord
 
 
   #sort available games for user to join
-  def available_games
+  def self.available_games(user.id)
+    #build an array to store available games
+    available_games = []
     #iterate through all available games
-    #pull any game that has a black_player_id of nil
-    #store pulled games in an array called available_games
-    #return available_games
     Games.each do |game|
-      if black_player_id == nil
-        puts "Join Game"
+      #pull any game that has a black_player_id of nil and
+      #white_player_id does not equal the user
+      if black_player_id == nil && white_player_id =! user.id
+        #store pulled games in an array called available_games
+        available_games << @game
+        #return available_games
+        puts available_games
       else
       end
     end
