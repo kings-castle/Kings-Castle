@@ -4,10 +4,9 @@
 <!-- Include header to introduce available games -->
 
 <h2> Join a Game </h2>
+
   <!-- Load all games -->
-  <% @games = Game.all %> 
-    <% @games.each do %>
+  <% @games = Game.all %>
+    <% @games.each do |game| %>
       <%= game.white_player_id %>
     <% end %>
-  
- 
