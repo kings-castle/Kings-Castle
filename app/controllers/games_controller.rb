@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
 	def index
+    @games = Game.available_games(current_user)
 	end
 
 	def new
@@ -7,7 +8,7 @@ class GamesController < ApplicationController
 	end
 
 	def create
-    @game = games.create(game_params)
+    @game = game.create(game_params)
 	end
 
 	def show
