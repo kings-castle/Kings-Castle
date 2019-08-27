@@ -5,16 +5,12 @@
 
 <h2> Join a Game </h2>
 
-  <!-- Load all games -->
-  <% @games = Game.all %>
-  <!-- iterate through each game -->
-    <% @games.each do |game| %>
-    <!-- list the white_player_id -->
-    <!-- eventually this should list the white_player_id user email -->
-      <%= game.white_player_id %>
-
-    <% end %>
-
     <!-- call available_games method on the current user -->
     <!-- as it this returns in instance of the array- need to pull out information we want to show on the page -->
-  <%= @games.available_games(current_user) %>
+  <% games = @games.available_games(current_user) %>
+    <% games.each do |game| %>
+      <div class = "container">
+      <%= game.id %>
+    <% end %>
+    
+  </div>
