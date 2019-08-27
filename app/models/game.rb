@@ -2,13 +2,18 @@ class Game < ApplicationRecord
   has_many :players
   has_many :pieces
 
-  scope :available_games, -> {where(user_id => current_user.id)}
+  #set association between games and users
+  belongs_to :user
+
+  #define a scope that sets user_id equal to the currently logged in user id
+  scope :available_games, -> { where(user_id == User.current_user.id)}
 
   #sort available games for user to join
   #call using Game.available_games(user_id)
   def self.available_games(user_id)
     #set user_id equal to the current user
-    user_id = current_user.user_id
+    #does this need to exist outside of the method?
+    user_id = current_user.id
     #test if user_id is set to current_user
     puts user_id
     #call all games
