@@ -14,3 +14,7 @@
       <%= game.white_player_id %>
 
     <% end %>
+
+    <!-- call available_games method on the current user -->
+    <!-- as it this returns in instance of the array- need to pull out information we want to show on the page -->
+  <%= @games.available_games(current_user) %>
