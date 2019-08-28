@@ -8,6 +8,13 @@
   <% games = @games.available_games(current_user) %>
     <% games.each do |game| %>
       <div class = "container">
+
         Game Number <%= game.id %> is ready to play!
+
+        <!-- provide simple form to pull current_user id and set to black player id -->
+        <%= simple_form_for game, :method => :put do |f| %>
+            <%= f.input :black_player_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+            <%= f.submit 'Join Game' %>
+        <% end %>
       </div>
     <% end %>

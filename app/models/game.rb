@@ -26,5 +26,14 @@ class Game < ApplicationRecord
     end
   end
 
+  #define the black_player_id of an available game
+  #call in the games#update method
+  def assign_player
+    #set the black_player_id equal to the current user
+    #call the update_attributes method
+    #pass arguments (black_player_id: current_user.id)
+
+  end
+
 end
 
