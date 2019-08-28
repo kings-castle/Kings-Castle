@@ -1,1 +1,13 @@
 <h1>Welcome to our Awesome Chess App</h1>
+
+<!-- Include header to introduce available games -->
+<h2> Join a Game </h2>
+    <!-- call available_games method on the current user -->
+    <!-- Return the game id value for each available game -->
+    <!-- Return all games with 1 user if method is called without a current user -->
+  <% games = @games.available_games(current_user) %>
+    <% games.each do |game| %>
+      <div class = "container">
+        Game Number <%= game.id %> is ready to play!
+      </div>
+    <% end %>
