@@ -6,6 +6,9 @@ class Game < ApplicationRecord
   belongs_to :white_player, class_name: 'User'
   belongs_to :black_player, class_name: 'User', optional: true
 
+  #define a scope so when Games.available is called, a player will only get games with 1 seat open
+  scope :available, -> { where(players <2)}
+
   #define a scope that sets user_id equal to the currently logged in user id
   #scope :available_games, -> { where(user_id == User.current_user.id)}
 
