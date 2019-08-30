@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 	def index
-    @games = Game.available_games(current_user)
+    # @games = Game.available_games(current_user)
 	end
 
 	def new
@@ -8,15 +8,17 @@ class GamesController < ApplicationController
 	end
 
 	def create
-    @game = game.create(game_params)
+    @game = Game.create(game_params)
+    redirect_to games_path
 	end
 
 	def show
+    @game = Game.find_by_id(params[:id])
 	end
 
   private
 
   def game_params
-    params.require(:game).permit(:white_player_id, :black_player_id, :game_id)
+    params.require(:game).permit(:name, :white_player_id, :black_player_id)
   end
 end
