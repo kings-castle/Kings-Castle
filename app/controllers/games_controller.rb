@@ -19,11 +19,9 @@ class GamesController < ApplicationController
     #identify the current game
     @game = Game.find_by_id(params[:id])
     #call the assign_player method to update game attributes
-    black_player_id == current_user.id
-    @game.assign_player
+    @game.assign_player(current_user)
     #redirect to the game#show path
     redirect_to game_path
-
   end
 
   private
@@ -31,6 +29,8 @@ class GamesController < ApplicationController
   def game_params
     params.require(:game).permit(:white_player_id, :black_player_id, :game_id)
   end
+
+ 
 end
 
 
