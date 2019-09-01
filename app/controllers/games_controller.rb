@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-	def index
+  def index
     @games = Game.available_games(current_user)
 	end
 
@@ -19,9 +19,11 @@ class GamesController < ApplicationController
     #identify the current game
     @game = Game.find_by_id(params[:id])
     #call the assign_player method to update game attributes
+    black_player_id == current_user.id
     @game.assign_player
     #redirect to the game#show path
-    redirect_to @game_path
+    redirect_to game_path
+
   end
 
   private

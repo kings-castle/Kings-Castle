@@ -28,11 +28,15 @@ class Game < ApplicationRecord
 
   #define the black_player_id of an available game
   #call in the games#update method
+  #set the black_player_id equal to the current user
   def assign_player
-    #set the black_player_id equal to the current user
-    #call the update_attributes method
-    #pass arguments (black_player_id: current_user.id)
-
+    #test if the black_player_id is nil
+    if black_player_id == nil
+      #set the black_player_id to the current user
+      black_player_id == current_user.id
+    else
+      redirect_to games_path
+    end
   end
 
 end
