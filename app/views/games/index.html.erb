@@ -13,7 +13,8 @@
 
         <!-- provide simple form to pull current_user id and set to black player id -->
         <%= simple_form_for game, :method => :put do |f| %>
-          <%= f.input :black_player_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+          <%= f.input :current_user, :as => :hidden, :input_html => { :value => :black_player_id } %>
+
             <%= f.submit 'Join Game' %>
         <% end %>
       </div>

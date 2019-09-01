@@ -6,8 +6,7 @@ class Game < ApplicationRecord
   belongs_to :white_player, class_name: 'User'
   belongs_to :black_player, class_name: 'User', optional: true
 
-  #define a scope that sets user_id equal to the currently logged in user id
-  #scope :available_games, -> { where(user_id == User.current_user.id)}
+  attr_accessor :black_player_id
 
   #sort available games for user to join
   #call using Game.available_games(user_id)
@@ -26,17 +25,6 @@ class Game < ApplicationRecord
     end
   end
 
-  #define the black_player_id of an available game
-  #call in the games#update method
-  #set the black_player_id equal to the current user
-  def assign_player(user)
-    #test if the black_player_id is nil
-    if black_player_id == nil
-      #set the black_player_id to the current user
-      black_player_id = current_user.id
-    else
-    end
-  end
 
 
 end
