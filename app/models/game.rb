@@ -1,4 +1,5 @@
 class Game < ApplicationRecord
+
   has_many :players
   has_many :pieces
 
@@ -23,6 +24,10 @@ class Game < ApplicationRecord
       #return a query to sort games where black_player_id is nil
       where("black_player_id = ?", nil)
     end
+  end
+
+  def black_player_id
+    puts :black_player_id
   end
 
 
