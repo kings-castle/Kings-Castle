@@ -10,6 +10,9 @@ class Game < ApplicationRecord
   #define a scope so when Games.available is called, a player will only get games with 1 seat open
   scope :available, -> { where(players <2)}
 
+  #define a scope that sets user_id equal to the currently logged in user id
+  #scope :available_games, -> { where(user_id == User.current_user.id)}
+
   #sort available games for user to join
   #call using Game.available_games(user_id)
   def self.available_games(user)
