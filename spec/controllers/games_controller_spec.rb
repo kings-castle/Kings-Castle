@@ -21,7 +21,8 @@ RSpec.describe GamesController, type: :controller do
         }
       }
       game = Game.last
-      expect(game.name).to eq("User")
+      # expect(game.name).to eq("User")
+      expect(game.white_player_id).to eq 1
     end
 
   end 
