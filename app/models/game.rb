@@ -26,8 +26,8 @@ class Game < ApplicationRecord
     end
   end
 
-  def black_player_id
-    puts :black_player_id
+  def self.assign_player(user)
+    where(black_player_id:nil).update_all(black_player_id: user.id)
   end
 
 
