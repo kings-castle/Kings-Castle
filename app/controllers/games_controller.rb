@@ -17,13 +17,11 @@ class GamesController < ApplicationController
 
   #reset the black_player_id in available games to equal the current_user.id
   def update
+    #locate the id of the current game
     @game = Game.find_by_id(params[:id])
+    #call the assign_player method on the current game using the current_user 
     @game = Game.assign_player(current_user)
-    #@user = current_user.id
-    #@user = User.find_by_id(params[:id])
-    #@game.update_attribute(:black_player_id, @user)
-    #@game.where(black_player_id:nil).update_all(black_player_id: current_user.id)
-
+    #redictec to the game path
     redirect_to game_path
   end
 
