@@ -6,4 +6,5 @@ class User < ApplicationRecord
          
   #set association between games and users
   has_many :games
+  has_many :pieces
 end
