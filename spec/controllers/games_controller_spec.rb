@@ -20,9 +20,9 @@ RSpec.describe GamesController, type: :controller do
       #     black_player_id: 2 
       #   }
       # }
-      # game = Game.last
+      game = Game.last
       # expect(game.name).to eq("User")
-      expect(self.white_player_id).to eq 1
+      expect(game.white_player_id).to eq 1
     end
 
   end 
