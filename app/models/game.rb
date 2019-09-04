@@ -33,6 +33,7 @@ class Game < ApplicationRecord
     end
   end
 
+
   private
 #### Method populate_game
 #### Added by Matt Arrick -- 8/30/19
@@ -45,26 +46,26 @@ class Game < ApplicationRecord
         x_pos: i,         # -- iterate through each space occupied by a pawn (0-7)
         y_pos: 1,         # -- all white pawns start on second row (row 1)
         color: true,      # -- true value means "white" as defined by color_name method in piece controller
-        game_id: Game.id,
-        player_id: 1 
+        game_id: self.id,
+        player_id: self.white_player_id 
         )
     end
 
     # Create White Rooks -- coordinates are corners on the first row (0,0 and 0,7)
-    Rook.create(piece_type: 'Rook', x_pos: 0, y_pos: 0, color: true, game_id: Game.id, player_id: 1)
-    Rook.create(piece_type: 'Rook', x_pos: 0, y_pos: 7, color: true, game_id: Game.id, player_id: 1)
+    Rook.create(piece_type: 'Rook', x_pos: 0, y_pos: 0, color: true, game_id: self.id, player_id: self.white_player_id)
+    Rook.create(piece_type: 'Rook', x_pos: 0, y_pos: 7, color: true, game_id: self.id, player_id: self.white_player_id)
 
     # Create White Knights -- coordinates are on the first row (0,1 and 0,6)
-    Knight.create(piece_type: 'Knight', x_pos: 0, y_pos: 1, color: true, game_id: Game.id, player_id: 1)
-    Knight.create(piece_type: 'Knight', x_pos: 0, y_pos: 6, color: true, game_id: Game.id, player_id: 1)
+    Knight.create(piece_type: 'Knight', x_pos: 0, y_pos: 1, color: true, game_id: self.id, player_id: self.white_player_id)
+    Knight.create(piece_type: 'Knight', x_pos: 0, y_pos: 6, color: true, game_id: self.id, player_id: self.white_player_id)
 
     # Create White Bishops -- coordinates are on the first row (0,2 and 0,5)
-    Bishop.create(piece_type: 'Bishop', x_pos: 0, y_pos: 2, color: true, game_id: Game.id, player_id: 1)
-    Bishop.create(piece_type: 'Bishop', x_pos: 0, y_pos: 5, color: true, game_id: Game.id, player_id: 1)
+    Bishop.create(piece_type: 'Bishop', x_pos: 0, y_pos: 2, color: true, game_id: self.id, player_id: self.white_player_id)
+    Bishop.create(piece_type: 'Bishop', x_pos: 0, y_pos: 5, color: true, game_id: self.id, player_id: self.white_player_id)
 
     # Create White Queen and King -- Queen coordinates are 0,3.  King coordinates are 0,4
-    Queen.create(piece_type: 'Queen', x_pos: 0, y_pos: 3, color: true, game_id: Game.id, player_id: 1)
-    King.create(piece_type: 'King', x_pos: 0, y_pos: 4, color: true, game_id: Game.id, player_id: 1)
+    Queen.create(piece_type: 'Queen', x_pos: 0, y_pos: 3, color: true, game_id: self.id, player_id: self.white_player_id)
+    King.create(piece_type: 'King', x_pos: 0, y_pos: 4, color: true, game_id: self.id, player_id: self.white_player_id)
 
     # Create Black Pawns
     (0..7).each do |i|
@@ -73,26 +74,26 @@ class Game < ApplicationRecord
         x_pos: i,         # -- iterate through each space occupied by a pawn (0-7)
         y_pos: 6,         # -- all white pawns start on second to last row (row 6)
         color: false,     # -- false value means "black" as defined by color_name method in piece controller
-        game_id: Game.id,
-        player_id: 1 #Game.black_player_id
+        game_id: self.id,
+        player_id: self.black_player_id #Game.black_player_id
         )
     end
 
     # Create Black Rooks -- coordinates are corners on the last row (7,0 and 7,7)
-    Rook.create(piece_type: 'Rook', x_pos: 7, y_pos: 0, color: false, game_id: Game.id, player_id: 1)
-    Rook.create(piece_type: 'Rook', x_pos: 7, y_pos: 7, color: false, game_id: Game.id, player_id: 1)
+    Rook.create(piece_type: 'Rook', x_pos: 7, y_pos: 0, color: false, game_id: self.id, player_id: self.black_player_id)
+    Rook.create(piece_type: 'Rook', x_pos: 7, y_pos: 7, color: false, game_id: self.id, player_id: self.black_player_id)
 
     # Create Black Knights -- coordinates are on the last row (7,1 and 7,6)
-    Knight.create(piece_type: 'Knight', x_pos: 7, y_pos: 1, color: false, game_id: Game.id, player_id: 1)
-    Knight.create(piece_type: 'Knight', x_pos: 7, y_pos: 6, color: false, game_id: Game.id, player_id: 1)
+    Knight.create(piece_type: 'Knight', x_pos: 7, y_pos: 1, color: false, game_id: self.id, player_id: self.black_player_id)
+    Knight.create(piece_type: 'Knight', x_pos: 7, y_pos: 6, color: false, game_id: self.id, player_id: self.black_player_id)
 
     # Create Black Bishops -- coordinates are on the last row (7,2 and 7,5)
-    Bishop.create(piece_type: 'Bishop', x_pos: 7, y_pos: 2, color: false, game_id: Game.id, player_id: 1)
-    Bishop.create(piece_type: 'Bishop', x_pos: 7, y_pos: 5, color: false, game_id: Game.id, player_id: 1)
+    Bishop.create(piece_type: 'Bishop', x_pos: 7, y_pos: 2, color: false, game_id: self.id, player_id: self.black_player_id)
+    Bishop.create(piece_type: 'Bishop', x_pos: 7, y_pos: 5, color: false, game_id: self.id, player_id: self.black_player_id)
 
     # Create Black Queen and King -- Queen coordinates are 7,3.  King coordinates are 7,4
-    Queen.create(piece_type: 'Queen', x_pos: 7, y_pos: 3, color: false, game_id: Game.id, player_id: 1)
-    King.create(piece_type: 'King', x_pos: 7, y_pos: 4, color: false, game_id: Game.id, player_id: 1)
+    Queen.create(piece_type: 'Queen', x_pos: 7, y_pos: 3, color: false, game_id: self.id, player_id: self.black_player_id)
+    King.create(piece_type: 'King', x_pos: 7, y_pos: 4, color: false, game_id: self.id, player_id: self.black_player_id)
 
   end
 

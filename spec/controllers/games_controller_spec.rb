@@ -12,7 +12,7 @@ RSpec.describe GamesController, type: :controller do
   describe "games#create action" do
     it "should successfully create a new game in our database" do
       # game = Factorybot.create(:game)
-      game = Game.create(name: 'User', white_player_id: 1, black_player_id: 2)
+      game = Game.create(name: 'User', white_player_id: 1, black_player_id: 1)
       # post :create, params: {
       #   game: { 
       #     name: 'User', 
@@ -20,9 +20,9 @@ RSpec.describe GamesController, type: :controller do
       #     black_player_id: 2 
       #   }
       # }
-      game = Game.last
+      # game = Game.last
       # expect(game.name).to eq("User")
-      expect(game.white_player_id).to eq 1
+      expect(self.white_player_id).to eq 1
     end
 
   end 
