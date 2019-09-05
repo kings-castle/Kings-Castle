@@ -14,10 +14,12 @@
 
       <!-- I've hard coded all the pieces on each initial space for now.  You'll see the
               source image under each "x-pos-" in the first 2 and last 2 rows. -->
-              
+
+      <!-- Added links to pieces#show page -->          
       <tr class="y-pos-0">
         <td class="x-pos-7">
           <img alt="White Rook" src="/assets/rookw.gif">
+          <%= link_to piece, piece_path(piece) %>
         </td>
         <td class="x-pos-6">
           <img alt="White Knight" src="/assets/knightw.gif">
