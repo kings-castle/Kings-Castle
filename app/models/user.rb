@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, 
          :omniauthable, :omniauth_providers => [:facebook]
+  #set association between games and users
   has_many :games
 
   def self.new_with_session(params, session)
