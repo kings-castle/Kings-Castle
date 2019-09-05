@@ -21,18 +21,19 @@ class Piece < ApplicationRecord
     color ? 'white' : 'black'
   end
 
-  #check to see if occupied spot is an opponent
-  #call this method on a piece and pass the x and y values of endpoint
+  #check if occupied spot is an opponent piece
+  #call on a piece and pass x_pos and y_pos values of endpoint
+  #for the current piece, is the piece located at the x,y endpoint an opponent piece?
   def self.opponent_piece?(x, y)
     #find and store opponent piece in a variable
-    opponent_piece = 
-    #if the space is not empty and the piece and opponent piece are different colors
-    #if I call this method in space_empty, remove the first condition
-    if opponent_piece.color =! @piece.color
-      #remove the opponent piece from the board
+    opponent_piece = Piece.all(:conditions => ["x_pos = ? and y_pos = ?", x, y])
+      #test if opponent piece color and current piece color are different
+      if opponent_piece.color =! @piece.color
+      #remove the opponent piece from the board, captured
       opponent_piece.update_attributes(x_pos: nil, y_pos: nil)
-      #updates x_pos and y_pos of piece to equal x and y
+      #update x_pos and y_pos of current piece to equal x and y
       @piece.update_attributes(x_pos: x, y_pos: y)
+    #else, if the pieces are the same color
     else
       puts "Your own piece is already in that spot, silly"
     end
@@ -40,18 +41,15 @@ class Piece < ApplicationRecord
 
   #check to see if the endpoint is occupied
   #pass x and y values of endpoint
-  def space_empty?(x, y)
+  def self.space_empty?(x, y)
     #if there is a piece at the endpoint
     if piece.exist(:x_pos => x and :y_pos => y)
-        #if the piece exists, report that space is not empty (false)
-        puts false
-        #trigger opponent_piece method
-        @piece.opponent_piece?
+      #trigger opponent_piece method
+      @piece.opponent_piece?
+    #else, if the space is empty
     else
-        #if the piece does not exist, report that the space is empty (true)
-        #updates x_pos and y_pos of piece to equal x and y
-        puts true
-        @piece.update_attributes(x_pos: x, y_pos: y)
+      #updates x_pos and y_pos of piece to equal x and y
+      @piece.update_attributes(x_pos: x, y_pos: y)
     end
   end
 
