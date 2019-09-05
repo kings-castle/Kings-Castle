@@ -1,5 +1,6 @@
 class Game < ApplicationRecord
-  attr_accessor :id
+  attr_accessor :id #, 
+  # attr_reader :white_player_id, :black_player_id
 
   after_create :populate_game  #### Added by Matt Arrick -- 8/30/19
 
@@ -33,6 +34,13 @@ class Game < ApplicationRecord
     end
   end
 
+  # def white_player_id
+  #   @white_player_id
+  # end
+
+  # def black_player_id
+  #   @black_player_id
+  # end
 
   private
 #### Method populate_game
