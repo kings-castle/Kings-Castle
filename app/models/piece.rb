@@ -21,16 +21,39 @@ class Piece < ApplicationRecord
     color ? 'white' : 'black'
   end
 
-  #trigger this method when attempting to make a valid move
-  #pass desired endpoint on the board as the argument
-
-  def move_to(y_pos, x_pos)
-    #check if a piece exists at the endpoint
-    #if there is no piece at the end point, relocate the piece and update the position
-    #else if moving_piece and end_point_piece are the same color, do nothing
-    #else the moving_piece and end_point_piece are not the same color, remove the piece from the board
+  #check to see if occupied spot is an opponent
+  #call this method on a piece and pass the x and y values of endpoint
+  def self.opponent_piece?(x, y)
+    #find and store opponent piece in a variable
+    opponent_piece = 
+    #if the space is not empty and the piece and opponent piece are different colors
+    #if I call this method in space_empty, remove the first condition
+    if opponent_piece.color =! @piece.color
+      #remove the opponent piece from the board
+      opponent_piece.update_attributes(x_pos: nil, y_pos: nil)
+      #updates x_pos and y_pos of piece to equal x and y
+      @piece.update_attributes(x_pos: x, y_pos: y)
+    else
+      puts "Your own piece is already in that spot, silly"
+    end
   end
 
+  #check to see if the endpoint is occupied
+  #pass x and y values of endpoint
+  def space_empty?(x, y)
+    #if there is a piece at the endpoint
+    if piece.exist(:x_pos => x and :y_pos => y)
+        #if the piece exists, report that space is not empty (false)
+        puts false
+        #trigger opponent_piece method
+        @piece.opponent_piece?
+    else
+        #if the piece does not exist, report that the space is empty (true)
+        #updates x_pos and y_pos of piece to equal x and y
+        puts true
+        @piece.update_attributes(x_pos: x, y_pos: y)
+    end
+  end
 
 end
 
