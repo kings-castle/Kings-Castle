@@ -34,13 +34,6 @@ class Game < ApplicationRecord
     end
   end
 
-  # def white_player_id
-  #   @white_player_id
-  # end
-
-  # def black_player_id
-  #   @black_player_id
-  # end
 
   private
 #### Method populate_game

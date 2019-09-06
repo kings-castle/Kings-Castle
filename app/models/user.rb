@@ -7,4 +7,12 @@ class User < ApplicationRecord
   #set association between games and users
   has_many :games
   has_many :pieces
+
+  # after_create :create_player
+
+  # private
+
+  # def create_player
+  #   Player.create(email: self.email, password: self.password)
+  # end
 end

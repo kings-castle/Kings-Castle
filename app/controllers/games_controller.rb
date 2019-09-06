@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 	def index
-    # @games = Game.available_games(current_user)
+    @games = Game.available_games(current_user)
 	end
 
 	def new

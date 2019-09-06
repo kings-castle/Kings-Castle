@@ -14,7 +14,7 @@ RSpec.describe GamesController, type: :controller do
       w = User.create(email: 'mattarrick@gmail.com', password: 'password')
       # game = Factorybot.create(:game)
       game = Game.create(name: 'User', white_player_id: 1, black_player_id: 1)
-      game.save
+      # game.save
       # puts game
       # post :create, params: {
       #   game: { 
@@ -23,7 +23,7 @@ RSpec.describe GamesController, type: :controller do
       #     black_player_id: 2 
       #   }
       # }
-      g = Game.first
+      g = Game.last
       # games = Game.all
       # game = games[0]
       # puts games
