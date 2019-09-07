@@ -16,6 +16,6 @@ RSpec.describe GamesController, type: :controller do
       g = Game.last
       expect(game.name).to eq("User")
     end
-
   end 
+  
 end

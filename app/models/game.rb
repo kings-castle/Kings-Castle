@@ -1,10 +1,10 @@
 class Game < ApplicationRecord
-  attr_accessor :id #, 
-  # attr_reader :white_player_id, :black_player_id
+
+  attr_accessor :id 
 
   after_create :populate_game  #### Added by Matt Arrick -- 8/30/19
 
-  has_many :players #:users
+  has_many :players 
   has_many :pieces
 
   #set association between games and users
@@ -33,7 +33,6 @@ class Game < ApplicationRecord
       where("black_player_id = ?", nil)
     end
   end
-
 
   private
 #### Method populate_game
@@ -98,6 +97,11 @@ class Game < ApplicationRecord
 
   end
 
-
+  #update the black_player_id to the current_user id
+  #this method is called in the games#update action
+  def self.assign_player(user)
+    where(black_player_id: nil).update_all(black_player_id: user.id)
+  end
+  
 end
 
