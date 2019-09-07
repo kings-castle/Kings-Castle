@@ -1,3 +1,5 @@
+require 'factory_bot'
+
 FactoryBot.define do
   factory :user do
     sequence :email do |n|
@@ -8,12 +10,14 @@ FactoryBot.define do
   end
 
    factory :game do 
-    white_player_id {|n| n}
-    black_player_id {|n| n}
-    game_id         {|n| n}
+    white_player_id { "1" }
+    black_player_id { "2" }
+    game_id         { "3" }
   end
 
   factory :player do 
-    player_id {|n| n}
+    player_id {|n| n} 
   end
 end
+
+# {|n| n}

@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :omniauthable, :omniauth_providers => [:facebook]
   #set association between games and users
   has_many :games
+  has_many :pieces
 
   def self.new_with_session(params, session)
     super.tap do |user|
@@ -23,4 +24,5 @@ class User < ApplicationRecord
       user.image = auth.info.image # assuming the user model has an image
     end
   end
+
 end

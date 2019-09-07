@@ -9,10 +9,12 @@ class GamesController < ApplicationController
 	end
 
 	def create
-    @game = game.create(game_params)
+    @game = Game.create(game_params)
+    redirect_to games_path
 	end
 
 	def show
+    @game = Game.find_by_id(params[:id])
 	end
 
   #reset the black_player_id in available games to equal the current_user.id
@@ -28,7 +30,7 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:game_id, :name, :white_player_id, :black_player_id)
+    params.require(:game).permit(:name, :white_player_id, :black_player_id)
   end
 
 
