@@ -21,51 +21,31 @@ class Piece < ApplicationRecord
     color ? 'white' : 'black'
   end
 
-  #check if occupied spot is an opponent piece
-  #call on a piece and pass x_pos and y_pos values of endpoint
-  #for the current piece, is the piece located at the x,y endpoint an opponent piece?
-  def self.opponent_piece?(x, y) #line 27 to 31 is is_obstructed method, beyond is capture
-    #find and store opponent piece in a variable
-    #use the find method to locate piece with specific coords
-    #if the piece exists, return true obstructed
+#is_obstrcuted method- check to see if a piece exists at given endpoint
+def self.is_obstructed?(x,y)
+  #if a piece exists at the given coordinates, return true
+  if piece.exist?(x_pos: x, y_pos: y)
+    true
+    #store the opponent piece
+    opponent_piece = Piece.find_by(x_pos: x, y_pos: y)
+  #if a piece does not exist at the given coordinates, return false
+  else
+    false
+end
 
-    #if a piece exists, use color_name method to test if it is opponent or not
-    opponent_piece = Piece.all(:conditions => ["x_pos = ? and y_pos = ?", x, y])
-      #test if opponent piece color and current piece color are different
-      if opponent_piece.color_name != @piece.color_name
-      #remove the opponent piece from the board, captured
-      opponent_piece.update_attributes(x_pos: nil, y_pos: nil)
-      #update x_pos and y_pos of current piece to equal x and y
-      @piece.update_attributes(x_pos: x, y_pos: y)
-    #else, if the pieces are the same color
-    else
-      puts "Your own piece is already in that spot, silly"
-    end
-  end
+#valid move- 
+def self.valid_move?(x,y)
 
-  #is obstrcuted method
-  #use the find method to locate piece with specific coords
-  if opponent_piece.color_name == @piece.color_name
-  #if they are the same color, return true
-
-  #capture logic
-  #test if move is obstructed
-  #if false, changes coords for pieces
-
-
-  #check to see if the endpoint is occupied
-  #pass x and y values of endpoint
-  def self.space_empty?(x, y)
-    #if there is a piece at the endpoint
-    if piece.exist(:x_pos => x and :y_pos => y)
-      #trigger opponent_piece method
-      @piece.opponent_piece?
-    #else, if the space is empty
-    else
-      #updates x_pos and y_pos of piece to equal x and y
-      @piece.update_attributes(x_pos: x, y_pos: y)
-    end
-  end
-
+#capture logic- test for color of obstructed piece and capture if opponent
+def self.capture(x, y)
+  #if the piece is obstructed and the color is not equal
+  if @piece.is_obstructed? == true && opponent_piece.color_name == @piece.color_name
+  #reassign the new piece and opponent piece location
+  opponent_piece.update_attributes(x_pos: nil, y_pos: nil)
+  @piece.update_attributes(x_pos: x, y_pos: y)
+  #if the colors are the same
+  else
+  #return statement that the pieces are the same
+  puts "Your own piece is already in that spot, silly"
 end
 
