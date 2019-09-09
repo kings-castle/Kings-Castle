@@ -33,10 +33,11 @@ def self.is_obstructed?(x,y)
     false
     #relocate piece to empty endpoint
     @piece.update_attributes(x_pos: x, y_pos: y)
+  end
 end
 
 #capture logic- test for color of obstructed piece and capture if opponent
-def self.capture(x, y)
+def self.capture(x,y)
   #if the piece is obstructed and the colors are the same
   if @piece.is_obstructed? == true && opponent_piece.color_name == @piece.color_name
     #return statement that the pieces are the same
@@ -46,8 +47,8 @@ def self.capture(x, y)
     #reassign the new piece and opponent piece location
     opponent_piece.update_attributes(x_pos: nil, y_pos: nil)
     @piece.update_attributes(x_pos: x, y_pos: y)
+  end
 end
 
 
-
- 
+end
