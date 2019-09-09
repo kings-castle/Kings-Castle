@@ -24,11 +24,15 @@ class Piece < ApplicationRecord
   #check if occupied spot is an opponent piece
   #call on a piece and pass x_pos and y_pos values of endpoint
   #for the current piece, is the piece located at the x,y endpoint an opponent piece?
-  def self.opponent_piece?(x, y)
+  def self.opponent_piece?(x, y) #line 27 to 31 is is_obstructed method, beyond is capture
     #find and store opponent piece in a variable
+    #use the find method to locate piece with specific coords
+    #if the piece exists, return true obstructed
+
+    #if a piece exists, use color_name method to test if it is opponent or not
     opponent_piece = Piece.all(:conditions => ["x_pos = ? and y_pos = ?", x, y])
       #test if opponent piece color and current piece color are different
-      if opponent_piece.color =! @piece.color
+      if opponent_piece.color_name != @piece.color_name
       #remove the opponent piece from the board, captured
       opponent_piece.update_attributes(x_pos: nil, y_pos: nil)
       #update x_pos and y_pos of current piece to equal x and y
@@ -38,6 +42,16 @@ class Piece < ApplicationRecord
       puts "Your own piece is already in that spot, silly"
     end
   end
+
+  #is obstrcuted method
+  #use the find method to locate piece with specific coords
+  if opponent_piece.color_name == @piece.color_name
+  #if they are the same color, return true
+
+  #capture logic
+  #test if move is obstructed
+  #if false, changes coords for pieces
+
 
   #check to see if the endpoint is occupied
   #pass x and y values of endpoint
