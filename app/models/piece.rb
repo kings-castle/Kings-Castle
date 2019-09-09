@@ -31,21 +31,23 @@ def self.is_obstructed?(x,y)
   #if a piece does not exist at the given coordinates, return false
   else
     false
+    #relocate piece to empty endpoint
+    @piece.update_attributes(x_pos: x, y_pos: y)
 end
-
-#valid move- 
-def self.valid_move?(x,y)
 
 #capture logic- test for color of obstructed piece and capture if opponent
 def self.capture(x, y)
-  #if the piece is obstructed and the color is not equal
+  #if the piece is obstructed and the colors are the same
   if @piece.is_obstructed? == true && opponent_piece.color_name == @piece.color_name
-  #reassign the new piece and opponent piece location
-  opponent_piece.update_attributes(x_pos: nil, y_pos: nil)
-  @piece.update_attributes(x_pos: x, y_pos: y)
-  #if the colors are the same
+    #return statement that the pieces are the same
+    puts "Your own piece is already in that spot, silly"
+  #if the piece is obstructed and the colors are different 
   else
-  #return statement that the pieces are the same
-  puts "Your own piece is already in that spot, silly"
+    #reassign the new piece and opponent piece location
+    opponent_piece.update_attributes(x_pos: nil, y_pos: nil)
+    @piece.update_attributes(x_pos: x, y_pos: y)
 end
 
+
+
+ 
