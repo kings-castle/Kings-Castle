@@ -22,9 +22,9 @@ class Piece < ApplicationRecord
   end
 
 #is_obstrcuted method- check to see if a piece exists at given endpoint
-def self.is_obstructed?(x,y)
+def is_obstructed?(x,y)
   #if a piece exists at the given coordinates, return true
-  if piece.exist?(x_pos: x, y_pos: y)
+  if Piece.exists?(x_pos: x, y_pos: y)
     true
     #store the opponent piece
     opponent_piece = Piece.find_by(x_pos: x, y_pos: y)
