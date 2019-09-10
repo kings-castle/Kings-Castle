@@ -23,18 +23,23 @@ class Piece < ApplicationRecord
 
 #is_obstrcuted method- check to see if a piece exists at given endpoint
 def is_obstructed?(x,y)
-  #if a piece exists at the given coordinates, return true
-  if Piece.exists?(x_pos: x, y_pos: y)
-    true
-    #store the opponent piece
-    opponent_piece = Piece.find_by(x_pos: x, y_pos: y)
-  #if a piece does not exist at the given coordinates, return false
-  else
-    false
+  #if a piece exists at the given coordinates, return true, else return false
+  if Piece.where({ x_pos: x, y_pos: y}) == nil
+    #Piece.where("x_pos = ? AND y_pos = ?", x, y)
+    #Piece.where(x_pos: x, y_pos: y) == nil
+    #Piece.exists?(:x_pos => x, :y_pos => y) == false
+    puts false
     #relocate piece to empty endpoint
-    @piece.update_attributes(x_pos: x, y_pos: y)
+    #@piece.update_attributes(x_pos: x, y_pos: y)
+  else
+    #Piece.exists?(:x_pos => x, :y_pos => y)
+    puts true
+    #store the opponent piece
+    #opponent_piece = Piece.find_by(x_pos: x, y_pos: y)
+  #if a piece does not exist at the given coordinates, return false
   end
 end
+
 
 #capture logic- test for color of obstructed piece and capture if opponent
 def self.capture(x,y)
