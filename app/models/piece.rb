@@ -24,7 +24,7 @@ class Piece < ApplicationRecord
 #is_obstrcuted method- check to see if a piece exists at given endpoint
 def is_obstructed?(x,y)
   #if a piece exists at the given coordinates, return true, else return false
-  if Piece.where({ x_pos: x, y_pos: y}) == nil
+  if self.game.pieces.where({ x_pos: x, y_pos: y}) == nil
     #Piece.where("x_pos = ? AND y_pos = ?", x, y)
     #Piece.where(x_pos: x, y_pos: y) == nil
     #Piece.exists?(:x_pos => x, :y_pos => y) == false
@@ -41,12 +41,15 @@ def is_obstructed?(x,y)
 end
 
 
+
+
+
 #capture logic- test for color of obstructed piece and capture if opponent
 def self.capture(x,y)
   #store the piece at the desired endpoint
   end_point_piece = Piece.where({ x_pos: x, y_pos: y})
-  #if the piece is obstructed and the colors are the same
-  if @piece.is_obstructed? == true && end_point_piece.color_name == @piece.color_name
+  #if the piece is not obstructed and the endpoint colors are the same
+  if @piece.is_obstructed? == false && end_point_piece.color_name == @piece.color_name
     #return statement that the pieces are the same
     puts "Your own piece is already in that spot, silly"
   #if the piece is obstructed and the colors are different 
