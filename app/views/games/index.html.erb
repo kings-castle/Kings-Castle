@@ -5,9 +5,15 @@
     <!-- call available_games method on the current user -->
     <!-- Return the game id value for each available game -->
     <!-- Return all games with 1 user if method is called without a current user -->
+
   <% games = @games.available_games(current_user) %>
     <% games.each do |game| %>
       <div class = "container">
         Game Number <%= game.id %> is ready to play!
+        <!-- simple form to update black_player_id -->
+        <%= simple_form_for game, :method => :put do |f| %>
+          <!-- trgger the games#update action-->
+            <%= f.submit 'Join Game' %>
+        <% end %>
       </div>
     <% end %>
