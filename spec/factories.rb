@@ -16,4 +16,7 @@ FactoryBot.define do
   factory :player do 
     player_id {|n| n}
   end
+
+  factory :piece do 
+  end
 end

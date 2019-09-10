@@ -1,8 +1,14 @@
 require 'rails_helper'
 
+
 RSpec.describe Piece, type: :model do
   describe "is_obstructed method" do 
     it "should relocate the piece if false" do 
+      #arrange
+      user1 = FactoryBot.create(:user)
+      piece1 = FactoryBot.create(:piece)
+      #act
+      #assert
     end
   end
 
