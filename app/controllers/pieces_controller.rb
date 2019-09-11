@@ -4,6 +4,11 @@ class PiecesController < ApplicationController
 		@piece = Piece.find(params[:id])  #find piece that is selected
 		@piece.update_attributes!(piece_params)
 	end
+
+  def update(x,y)
+    @piece.update_attributes(:x_pos => x, :y_pos => y)
+    redirect_to game_path
+  end
 	
 	private
 

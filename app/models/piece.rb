@@ -1,6 +1,6 @@
 class Piece < ApplicationRecord
-  attr_accessor :color, :postion
-
+  attr_accessor :color, :x_pos, :y_pos
+                        #changed the attr_accessor :position to x_pos and y_pos fields in the db---Matt Arrick 9/11/19
 
   belongs_to :game
   belongs_to :player
