@@ -289,6 +289,7 @@ DEPENDENCIES
   devise
   factory_bot_rails
   figaro
+  9b89cce48719ecbdcc37e0cca4ff7b475bb418a9
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
@@ -314,4 +315,4 @@ RUBY VERSION
    ruby 2.5.5p157
 
 BUNDLED WITH
-   2.0.2
+   2.0.1
