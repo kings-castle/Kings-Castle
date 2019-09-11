@@ -28,6 +28,12 @@ def find_piece(x,y)
   puts piece
 end
 
+def find_piece_player_id(x,y)
+   @piece = self.game.pieces.where(x_pos: x, y_pos: y)
+   puts @piece.player_id
+end
+
+
 #test for empty endpoint and move player
 def move(x,y)
   #returns true if piece exists
@@ -47,16 +53,20 @@ end
 #captures piece at the current endpoint
 #returns error if pieces are the same color
 def capture(x,y)
-  #returns true if piece exists
-  #returns false if piece does not exist
+  #locates piece at endpoint
   endpoint_piece = self.game.pieces.where(x_pos: x, y_pos: y)
+  #stores color of endpoint and moving piece
+  piece_color = self.color_name
+  endpoint_piece_color = endpoint_piece.color_name
 
   #if endpoint_piece returns true and the colors are the same
-  if endpoint_piece != nil && endpoint_piece.color_name == @piece.color_name
+  #if endpoint_piece != nil && endpoint_piece.color_name == self.color_name
+  if endpoint_piece != nil && piece_color == endpoint_piece_color
     puts "Your own piece is already in that spot, silly"
 
   #if the find_piece method returns true and the colors are different
-  else endpoint_piece != nil && endpoint_piece.color_name != @piece.color_name
+  #else endpoint_piece != nil && endpoint_piece.color != self.color
+  else endpoint_piece != nil && piece_color != endpoint_piece_color
     #update the x and y pos of opponent_piece to equal 0
     endpoint_piece.update_attributes(:x_pos => nil, :y_pos => nil)
     #update the x and y pos of moving piece to equal endpoint
@@ -66,6 +76,8 @@ end
 
 #right now my blocker is that color_name is returned as an
 #undefined method for the given piece
+#I cant seem to find a way to test for the color of the endpoint piece
+#but I think after that the update attributes method should work fine
 
 end
 
