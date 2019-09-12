@@ -24,8 +24,8 @@ class Piece < ApplicationRecord
 #allows you to find a test a piece in a game
 #returns the piece at the given x,y location
 def find_piece(x,y)
-  piece = self.game.pieces.where(x_pos: x, y_pos: y)
-  puts piece
+  @piece = self.game.pieces.where(x_pos: x, y_pos: y)
+  puts @piece
 end
 
 def find_piece_player_id(x,y)
@@ -55,18 +55,13 @@ end
 def capture(x,y)
   #locates piece at endpoint
   endpoint_piece = self.game.pieces.where(x_pos: x, y_pos: y)
-  #stores color of endpoint and moving piece
-  piece_color = self.color_name
-  endpoint_piece_color = endpoint_piece.color_name
 
   #if endpoint_piece returns true and the colors are the same
-  #if endpoint_piece != nil && endpoint_piece.color_name == self.color_name
-  if endpoint_piece != nil && piece_color == endpoint_piece_color
+  if endpoint_piece != nil && endpoint_piece.player_id == self.player_id
     puts "Your own piece is already in that spot, silly"
 
   #if the find_piece method returns true and the colors are different
-  #else endpoint_piece != nil && endpoint_piece.color != self.color
-  else endpoint_piece != nil && piece_color != endpoint_piece_color
+  else endpoint_piece != nil && endpoint_piece.player_id != self.player_id
     #update the x and y pos of opponent_piece to equal 0
     endpoint_piece.update_attributes(:x_pos => nil, :y_pos => nil)
     #update the x and y pos of moving piece to equal endpoint
@@ -74,10 +69,9 @@ def capture(x,y)
   end
 end
 
-#right now my blocker is that color_name is returned as an
-#undefined method for the given piece
-#I cant seem to find a way to test for the color of the endpoint piece
-#but I think after that the update attributes method should work fine
+#right now my blocker is that I cannot access player_id as an attribute of a piece
+#it seems like when I quere for a piece, it does not store in the variable
+#so when I try to call the attribute on the variable, it does not show up
 
 end
 
