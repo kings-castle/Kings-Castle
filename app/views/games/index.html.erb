@@ -11,7 +11,7 @@
       <div class = "container">
         Game Number <%= game.id %> is ready to play!
         <!-- simple form to update black_player_id -->
-        <%= simple_form_for game, :method => :put do |f| %>
+        <%= simple_form_for games_path, :method => :put do |f| %>
           <!-- trgger the games#update action-->
             <%= f.submit 'Join Game' %>
         <% end %>
