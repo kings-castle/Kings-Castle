@@ -13,63 +13,199 @@
             The color of each square is controlled by the "#gameboard" CSS in master.scss. -->
 
       <!-- I've hard coded all the pieces on each initial space for now.  You'll see the
-              source image under each "x-pos-" in the first 2 and last 2 rows. -->
-              
+              source image under each "x-pos-" in the first 2 and last 2 rows. -->        
       <tr class="y-pos-0">
         <td class="x-pos-7">
-          <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(0, 7, @game.id).image %>
-           <!--         <img alt="White Rook" src="/assets/rookw.gif">  -->
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(7, 0, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(7, 0, @game.id).image %>
+            <% end %>
+          <% end %>
         </td>
         <td class="x-pos-6">
-          <img alt="White Knight" src="/assets/knightw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(6, 0, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(6, 0, @game.id).image %>
+            <% end %>
+          <% end %>
         </td>
         <td class="x-pos-5">
-          <img alt="White Bishop" src="/assets/bishopw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(5, 0, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(5, 0, @game.id).image %>
+            <% end %>
+          <% end %>
         </td>
         <td class="x-pos-4">
-          <img alt="White King" src="/assets/kingw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(4, 0, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(4, 0, @game.id).image %>
+            <% end %>
+          <% end %>        
         </td>
         <td class="x-pos-3">
-          <img alt="White Queen" src="/assets/queenw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(3, 0, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(3, 0, @game.id).image %>
+            <% end %>
+          <% end %>       
         </td>
         <td class="x-pos-2">
-          <img alt="White Bishop" src="/assets/bishopw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(2, 0, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(2, 0, @game.id).image %>
+            <% end %>
+          <% end %>
         </td>
         <td class="x-pos-1">
-          <img alt="White Knight" src="/assets/knightw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(1, 0, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(1, 0, @game.id).image %>
+            <% end %>
+          <% end %>        
         </td>
         <td class="x-pos-0">
-          <img alt="White Rook" src="/assets/rookw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(0, 0, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(0, 0, @game.id).image %>
+            <% end %>
+          <% end %>        
         </td>
       </tr>
       <tr class="y-pos-1">
         <td class="x-pos-7">
-          <img alt="White Pawn" src="/assets/pawnw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(7, 1, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(7, 1, @game.id).image %>
+            <% end %>
+          <% end %>        
         </td>
         <td class="x-pos-6">
-          <img alt="White Pawn" src="/assets/pawnw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(6, 1, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(6, 1, @game.id).image %>
+            <% end %>
+          <% end %>        
         </td>
         <td class="x-pos-5">
-          <img alt="White Pawn" src="/assets/pawnw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(5, 1, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(5, 1, @game.id).image %>
+            <% end %>
+          <% end %>        
         </td>
         <td class="x-pos-4">
-          <img alt="White Pawn" src="/assets/pawnw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(4, 1, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(4, 1, @game.id).image %>
+            <% end %>
+          <% end %>        
         </td>
         <td class="x-pos-3">
-          <img alt="White Pawn" src="/assets/pawnw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(3, 1, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(3, 1, @game.id).image %>
+            <% end %>
+          <% end %>        
         </td>
         <td class="x-pos-2">
-          <img alt="White Pawn" src="/assets/pawnw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(2, 1, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(2, 1, @game.id).image %>
+            <% end %>
+          <% end %>        
         </td>
         <td class="x-pos-1">
-          <img alt="White Pawn" src="/assets/pawnw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(1, 1, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(1, 1, @game.id).image %>
+            <% end %>
+          <% end %>        
         </td>
         <td class="x-pos-0">
-          <img alt="White Pawn" src="/assets/pawnw.gif">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(0, 1, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(0, 1, @game.id).image %>
+            <% end %>
+          <% end %>        
         </td>
       </tr>
       <tr class="y-pos-2">
-        <td class="x-pos-7"></td>
+        <td class="x-pos-7">
+          <% if Piece.find_by_x_pos_and_y_pos_and_game_id(7, 2, @game.id) == nil %>
+            <%= link_to game_path, method: :put do %>
+              <div class="blank"></div>
+            <% end %>
+          <% else %>
+            <%= link_to game_path, method: :put do %>
+              <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(7, 2, @game.id).image %>
+            <% end %>
+          <% end %>
+        </td>
         <td class="x-pos-6"></td>
         <td class="x-pos-5"></td>
         <td class="x-pos-4"></td>
