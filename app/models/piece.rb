@@ -21,7 +21,7 @@ class Piece < ApplicationRecord
     color ? 'white' : 'black'
   end
 
-  
+
 
 ### Added by Samantha Lee 9/15/2019
 
