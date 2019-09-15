@@ -17,7 +17,8 @@
               
       <tr class="y-pos-0">
         <td class="x-pos-7">
-          <img alt="White Rook" src="/assets/rookw.gif">
+          <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(0, 7, @game.id).image %>
+           <!--         <img alt="White Rook" src="/assets/rookw.gif">  -->
         </td>
         <td class="x-pos-6">
           <img alt="White Knight" src="/assets/knightw.gif">
