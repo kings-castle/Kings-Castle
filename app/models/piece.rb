@@ -21,5 +21,38 @@ class Piece < ApplicationRecord
     color ? 'white' : 'black'
   end
 
+
+private
+
+#test if a move is a valid diagonal move
+def diagonal_move?(axis)
+  #define a method for slope
+  #if slope is equal to 1 or -1, true
+  #if slope is not equal to 1 or -1, false
+end
+
+#test if a valid diagonal path is obstructed
+def diagonal_block?(axis)
+
+  #if diagonal_move? = true
+
+  #test if there are pieces on that slope causing an obstruction
+
+    #if the endpoint x,y are both greater than starting x,y
+      #test obstructin by adding 1 to each x and y
+    #if the endpoint x,y are both less than starting x,y
+      #test obstruction by subtracting 1 to each x and y
+    #if the endpoint x is greater than starting x and endpoint y is less than starting y
+      #test obstruction by adding 1 to x and subtracting 1 from y
+    #if the endpoing x is less than starting x and endpoint y is greater than starting y
+      #test obstruction by subtracting 1 from x and adding 1 to y
+
+  #if there are pieces on the path, is obstructed = true
+  #if the path is clear, is obstructed = false
+
+
+  end
+
+
 end
 
