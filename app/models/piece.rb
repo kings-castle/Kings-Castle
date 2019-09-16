@@ -22,13 +22,18 @@ class Piece < ApplicationRecord
   end
 
 
-private
 
 #test if a move is a valid diagonal move
-def diagonal_move?(axis)
+def diagonal_move?(start_x, start_y, end_x, end_y)
   #define a method for slope
+  slope = (end_y - start_y) / (end_x - start_x)
   #if slope is equal to 1 or -1, true
+  if slope == 1 || slope == -1
+    true
   #if slope is not equal to 1 or -1, false
+  else
+    false
+  end
 end
 
 #test if a valid diagonal path is obstructed
