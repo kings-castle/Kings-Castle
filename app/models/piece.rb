@@ -35,7 +35,7 @@ class Piece < ApplicationRecord
     color ? 'white' : 'black'
   end
 
-##Created and Updated by Samantha Lee on 9/18/2019
+###Created and Updated by Samantha Lee on 9/18/2019
 
 #allows you to find a test a piece in a game
 #returns array of the piece at the given x,y location
@@ -90,9 +90,11 @@ def capture(x,y)
   end
 end
 
-#Ends updates from 9/18/2019
+###Ends Samantha's updates from 9/18/2019
 
   #private 
+
+###Samantha Lee updated methods from Cooper on 9/18/2019
 
   #Check that x axis value changes
   #Check that y axis value stays same
@@ -118,15 +120,20 @@ end
     end
   end
 
+  #Checks if there is a piece on the vertical path of a moving piece
   def vertical_block?(y_axis)
+    #if the y_pos endpoint value is greated than the y vale of the moving piece
    if y_axis > self.y_pos
+      #test path moving up for pieces
       (y_axis + self.y_pos).times do |i|
         self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos + i + 1).empty?
         #return false, there is no vertical block and piece can move
         false
       end
+    #if the y_pos endpoint value is less than the y value of the moving piece
     else  
       #Will return array
+      #test path moving down for pieces
       (y_axis - self.y_pos).times do |i|
         self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos - i + 1).empty?
         #return false, there is no vertical block and piece can move
@@ -135,53 +142,12 @@ end
     end
   end
 
-  #def diagonal_block?(x_axis, y_axis)
-    #Diagonal right
-    #if x_axis > self.x_pos && y_axis > self.y_pos 
 
-    #Diagonal left
-    #else
-    #end
-
-  #end
-
-#test if a move is a valid diagonal move
-#def diagonal_move?(start_x, start_y, end_x, end_y)
-  #define a method for slope
-  #slope = (end_y - start_y) / (end_x - start_x)
-  #if slope is equal to 1 or -1, true
-  #if slope == 1 || slope == -1
-    #true
-  #if slope is not equal to 1 or -1, false
-  #else
-    #false
-  #end
-#end
-
-#test if a valid diagonal path is obstructed
-#def diagonal_block?(axis)
-
-  #if diagonal_move? = true
-
-  #test if there are pieces on that slope causing an obstruction
-
-    #if the endpoint x,y are both greater than starting x,y
-      #test obstructin by adding 1 to each x and y
-    #if the endpoint x,y are both less than starting x,y
-      #test obstruction by subtracting 1 to each x and y
-    #if the endpoint x is greater than starting x and endpoint y is less than starting y
-      #test obstruction by adding 1 to x and subtracting 1 from y
-    #if the endpoing x is less than starting x and endpoint y is greater than starting y
-      #test obstruction by subtracting 1 from x and adding 1 to y
-
-  #if there are pieces on the path, is obstructed = true
-  #if the path is clear, is obstructed = false
-  #end
-
-
+  #Similar to find piece method, but this specifically tests for an empty spot
   def open_space?(x_end, y_end)
     #Check if space is open
     self.game.pieces.where(x_pos: x_end, y_pos: y_end).empty?
   end
 
+### End of Samantha's updates on 9/18/2019
 end
