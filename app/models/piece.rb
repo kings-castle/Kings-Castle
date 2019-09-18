@@ -83,6 +83,8 @@ def capture(x,y)
       #if there is no piece to capture, relocate the moving piece to the empty spot
       self.move(x,y)
     end
+  else
+    puts "You can't move, your piece is obstructed"
   end
 end
 
