@@ -35,6 +35,8 @@ class Piece < ApplicationRecord
     color ? 'white' : 'black'
   end
 
+##Created and Updated by Samantha Lee on 9/18/2019
+
 #allows you to find a test a piece in a game
 #returns array of the piece at the given x,y location
 def find_piece(x,y)
@@ -88,6 +90,7 @@ def capture(x,y)
   end
 end
 
+#Ends updates from 9/18/2019
 
   #private 
 
@@ -101,7 +104,7 @@ end
       (x_axis + self.x_pos).times do |i|
         self.game.pieces.where(x_pos: self.x_pos + i + 1, y_pos: self.y_pos).empty?
         #return false, there is no horizontal block and piece can move
-        return false
+        false
       end
     #Left
     else  
@@ -110,7 +113,7 @@ end
       (x_axis - self.x_pos).times do |i|
         self.game.pieces.where(x_pos: self.x_pos - i + 1, y_pos: self.y_pos).empty?
         #return false, there is no horizontal block and piece can move
-        return false
+        false
       end
     end
   end
@@ -120,14 +123,14 @@ end
       (y_axis + self.y_pos).times do |i|
         self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos + i + 1).empty?
         #return false, there is no vertical block and piece can move
-        return false
+        false
       end
     else  
       #Will return array
       (y_axis - self.y_pos).times do |i|
         self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos - i + 1).empty?
         #return false, there is no vertical block and piece can move
-        return false
+        false
       end
     end
   end
