@@ -13,7 +13,16 @@
             The color of each square is controlled by the "#gameboard" CSS in master.scss. -->
 
       <!-- I've hard coded all the pieces on each initial space for now.  You'll see the
-              source image under each "x-pos-" in the first 2 and last 2 rows. -->        
+              source image under each "x-pos-" in the first 2 and last 2 rows. -->
+
+      <!--UPDATE Matt Arrick -- 9/18/19
+          Each square on the board is now searching the pieces table for a piece that has
+            the coordinates of the that square.  If the search returns a nil then the space
+            is blank, otherwise it will return the image of the piece that was stored at
+            game creation
+
+            There is a lot of code so I tried separating each row (y-pos) with spaces and 
+              a comment notating the row number  -->
 
 
 
