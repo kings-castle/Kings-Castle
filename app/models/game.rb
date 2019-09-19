@@ -99,11 +99,11 @@ class Game < ApplicationRecord
 
   end
 
-  #update the black_player_id to the current_user id
-  #this method is called in the games#update action
-  def self.assign_player(user)
-    where(black_player_id: nil).update_all(black_player_id: user.id)
-  end
+  # #update the black_player_id to the current_user id
+  # #this method is called in the games#update action
+  # def self.assign_player(user)
+  #   where(black_player_id: nil).update_all(black_player_id: user.id)
+  # end
   
 end
 

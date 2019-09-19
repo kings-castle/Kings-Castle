@@ -22,7 +22,8 @@ class GamesController < ApplicationController
     #locate the id of the current game
     @game = Game.find_by_id(params[:id])
     #call the assign_player method on the current game using the current_user 
-    @game = Game.assign_player(current_user)
+    # @game = Game.assign_player(current_user)
+    @piece = Piece.assign_player(current_user)
     #redictec to the game path
     redirect_to game_path
   end

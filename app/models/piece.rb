@@ -3,7 +3,7 @@ class Piece < ApplicationRecord
 
 
   belongs_to :game
-  belongs_to :player #:user
+  belongs_to :player, optional: true #:user
 
   self.inheritance_column = :piece_type
 
@@ -29,6 +29,13 @@ class Piece < ApplicationRecord
   # def find_by_coords(x, y, g_id)
   #   @piece = Piece.find_by_x_pos_and_y_pos_and_game_id(x, y, g_id)
   # end
+
+  #update the black_player_id to the current_user id
+  #this method is called in the games#update action
+  def self.assign_player(user)
+    where(black_player_id: nil).update_all(black_player_id: user.id)
+  end
+  
 
 end
 
