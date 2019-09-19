@@ -96,7 +96,6 @@ class Game < ApplicationRecord
     # Create Black Queen and King -- Queen coordinates are 7,3.  King coordinates are 7,4
     Queen.create(piece_type: 'Queen', x_pos: 3, y_pos: 7, color: false, game_id: self.id, player_id: self.black_player_id, image: "/assets/queenb.gif")
     King.create(piece_type: 'King', x_pos: 4, y_pos: 7, color: false, game_id: self.id, player_id: self.black_player_id, image: "/assets/kingb.gif")
-
   end
 
   #update the black_player_id to the current_user id
