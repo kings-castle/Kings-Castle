@@ -1,9 +1,10 @@
 class Piece < ApplicationRecord
-  attr_accessor :color, :postion
+  # attr_accessor :color, :postion
 
   #sets associations with pieces to game and player
   belongs_to :game
-  belongs_to :player #:user
+  belongs_to :player, optional: true #UPDATE Matt Arrick 9/18/19 
+                                        # Added 'optional: true' to allow nil player_id for black pieces upon game creation
 
   self.inheritance_column = :piece_type
 
@@ -34,6 +35,7 @@ class Piece < ApplicationRecord
   def color_name
     color ? 'white' : 'black'
   end
+
 
 ###Created and Updated by Samantha Lee on 9/18/2019
 
@@ -95,6 +97,7 @@ end
   #private 
 
 ###Samantha Lee updated methods from Cooper on 9/18/2019
+
 
   #Check that x axis value changes
   #Check that y axis value stays same

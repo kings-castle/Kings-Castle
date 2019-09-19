@@ -18,6 +18,10 @@
   background-color: #000000;
 }
 
+#gameboard td:hover {
+  border: 4px solid blue;
+}
+
 h1 {
   text-align: center;
   font-size: 24;
@@ -42,4 +46,8 @@ h2 {
 img, picture {
   margin: 0;
   max-width: 100%;
+}
+
+.selected {
+  border: 4px solid blue;
 }

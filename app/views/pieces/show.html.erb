@@ -1,0 +1,246 @@
+<div class="game">
+  <h1>Have Fun</h1>
+  <br />
+  <table id="gameboard">
+    <tbody>
+      <!-- Each square is represented with lines of HTML below
+            Each "y-pos-" represents each row of the 8 rows starting at the top with row 0 
+              and ending at the bottom with row 7.
+
+            Each "x-pos-" represents each square within each row.  There are 8 squares in
+              each row starting with 7 and ending with 0.
+
+            The color of each square is controlled by the "#gameboard" CSS in master.scss. -->
+
+      <!-- I've hard coded all the pieces on each initial space for now.  You'll see the
+              source image under each "x-pos-" in the first 2 and last 2 rows. -->
+
+      <!-- Added links to pieces#show page updated html to ruby to support links (MC) -->
+
+      <tr class="y-pos-0">
+        <td class="x-pos-7">
+          <%= link_to piece_path,({:x => 0, :y => 7}), method: :post do %>
+            <%= image_tag Piece.find_by_x_pos_and_y_pos_and_game_id(0, 7, @game.id).image %>
+          <% end %>
+        </td>
+
+        <td class="x-pos-6">
+          <%= link_to piece_path do %>
+            <%= image_tag "knightw.gif" %>
+          <% end %>          
+        </td>
+
+        <td class="x-pos-5">
+          <%= link_to piece_path do %>
+            <%= image_tag "bishopw.gif" %>
+          <% end %>           
+        </td>
+
+        <td class="x-pos-4">
+          <%= link_to piece_path do %>
+            <%= image_tag "kingw.gif" %>
+          <% end %>            
+        </td>
+
+        <td class="x-pos-3">
+          <%= link_to piece_path do %>
+            <%= image_tag "queenw.gif" %>
+          <% end %>           
+        </td>
+
+        <td class="x-pos-2">
+          <%= link_to piece_path do %>
+            <%= image_tag "bishopw.gif" %>
+          <% end %>            
+        </td>
+
+        <td class="x-pos-1">
+          <%= link_to piece_path do %>
+            <%= image_tag "knightw.gif" %>
+          <% end %>          
+        </td>
+
+        <td class="x-pos-0">
+          <%= link_to piece_path do %>
+            <%= image_tag "rookw.gif" %>
+          <% end %>
+        </td>
+
+      </tr>
+      <tr class="y-pos-1">
+        <td class="x-pos-7">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnw.gif" %>
+          <% end %>          
+        </td>
+
+        <td class="x-pos-6">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnw.gif" %>
+          <% end %>     
+        </td>
+        <td class="x-pos-5">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnw.gif" %>
+          <% end %>     
+        </td>
+        <td class="x-pos-4">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnw.gif" %>
+          <% end %>     
+        </td>
+        <td class="x-pos-3">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnw.gif" %>
+          <% end %>     
+        </td>
+        <td class="x-pos-2">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnw.gif" %>
+          <% end %>     
+        </td>
+        <td class="x-pos-1">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnw.gif" %>
+          <% end %>     
+        </td>
+        <td class="x-pos-0">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnw.gif" %>
+          <% end %>     
+        </td>
+      </tr>
+      <tr class="y-pos-2">
+        <td class="x-pos-7"></td>
+        <td class="x-pos-6"></td>
+        <td class="x-pos-5"></td>
+        <td class="x-pos-4"></td>
+        <td class="x-pos-3"></td>
+        <td class="x-pos-2"></td>
+        <td class="x-pos-1"></td>
+        <td class="x-pos-0"></td>
+      </tr>
+      <tr class="y-pos-3">
+        <td class="x-pos-7"></td>
+        <td class="x-pos-6"></td>
+        <td class="x-pos-5"></td>
+        <td class="x-pos-4"></td>
+        <td class="x-pos-3"></td>
+        <td class="x-pos-2"></td>
+        <td class="x-pos-1"></td>
+        <td class="x-pos-0"></td>
+      </tr>
+      <tr class="y-pos-4">
+        <td class="x-pos-7"></td>
+        <td class="x-pos-6"></td>
+        <td class="x-pos-5"></td>
+        <td class="x-pos-4"></td>
+        <td class="x-pos-3"></td>
+        <td class="x-pos-2"></td>
+        <td class="x-pos-1"></td>
+        <td class="x-pos-0"></td>
+      </tr>
+      <tr class="y-pos-5">
+        <td class="x-pos-7"></td>
+        <td class="x-pos-6"></td>
+        <td class="x-pos-5"></td>
+        <td class="x-pos-4"></td>
+        <td class="x-pos-3"></td>
+        <td class="x-pos-2"></td>
+        <td class="x-pos-1"></td>
+        <td class="x-pos-0"></td>
+      </tr>
+      <tr class="y-pos-6">
+        <td class="x-pos-7">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnb.gif" %>
+          <% end %>     
+        </td>
+        <td class="x-pos-6">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnb.gif" %>
+          <% end %>   
+        </td>
+        <td class="x-pos-5">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnb.gif" %>
+          <% end %>   
+        </td>
+        <td class="x-pos-4">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnb.gif" %>
+          <% end %>   
+        </td>
+        <td class="x-pos-3">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnb.gif" %>
+          <% end %>   
+        </td>
+        <td class="x-pos-2">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnb.gif" %>
+          <% end %>   
+        </td>
+        <td class="x-pos-1">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnb.gif" %>
+          <% end %>   
+        </td>
+        <td class="x-pos-0">
+          <%= link_to piece_path do %>
+            <%= image_tag "pawnb.gif" %>
+          <% end %>   
+        </td>
+      </tr>
+      <tr class="y-pos-7">
+        <td class="x-pos-7">
+          <%= link_to piece_path do %>
+            <%= image_tag "rookb.gif" %>
+          <% end %>
+        </td>
+        <td class="x-pos-6">
+          <%= link_to piece_path do %>
+            <%= image_tag "knightb.gif" %>
+          <% end %>
+        </td>
+        <td class="x-pos-5">
+          <%= link_to piece_path do %>
+            <%= image_tag "bishopb.gif" %>
+          <% end %>
+        </td>
+        <td class="x-pos-4">
+          <%= link_to piece_path do %>
+            <%= image_tag "kingb.gif" %>
+          <% end %>
+        </td>
+        <td class="x-pos-3">
+          <%= link_to piece_path do %>
+            <%= image_tag "queenb.gif" %>
+          <% end %>
+        </td>
+        <td class="x-pos-2">
+          <%= link_to piece_path do %>
+            <%= image_tag "bishopb.gif" %>
+          <% end %>
+        </td>
+        <td class="x-pos-1">
+          <%= link_to piece_path do %>
+            <%= image_tag "knightb.gif" %>
+          <% end %>
+        </td>
+        <td class="x-pos-0">
+          <%= link_to piece_path do %>
+            <%= image_tag "rookb.gif" %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <br /> -->
+  <div class="game-nav-item">
+    <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
+  </div>
+
+
+</div>
+
