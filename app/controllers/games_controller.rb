@@ -23,14 +23,12 @@ class GamesController < ApplicationController
     @game = Game.find_by_id(params[:id])
     #call the assign_player method on the current game using the current_user 
     @game = Game.assign_player(current_user)
-    # UPDATE Matt Arrick 9/18/19
-      # I tried to update the player_id for black pieces when user joins.
-        # The above code (↑↑) works to update the game.black_player_id but
-        # at the moment the below code (↓↓) does not update the player_id for 
-        # black pieces in the pieces table.  However, it also does not error.
-        # We'll need to come back to this to ensure the black pieces recieve
-        # the proper user.id.
-    @piece = Piece.where(["player_id = ? and game_id = ?", nil, Game.find_by_id(params[:id])]).update_all(player_id: current_user.id)
+    # UPDATE Matt Arrick 9/21/19
+      # Black player_id is now updating when a player joins a game
+        # Added 'update_player_id' method to the piece model that finds pieces 
+        # that are nil and belong to the current_game and then updates that player_id
+        # with the current_user. (↓↓↓)
+    @piece = Piece.update_player_id(current_user, current_game)
     #redictect to the game path
     redirect_to game_path
   end
@@ -42,6 +40,12 @@ class GamesController < ApplicationController
   end
 
 
+  # UPDATE Matt Arrick 9/21/19
+    # Added a helper_method to get the current_game
+  helper_method :current_game
+  def current_game
+    @current_game ||= Game.find(params[:id])
+  end
  
 end
 
