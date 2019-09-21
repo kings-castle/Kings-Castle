@@ -36,6 +36,15 @@ class Piece < ApplicationRecord
     color ? 'white' : 'black'
   end
 
+ # UPDATE Matt Arrick 9/21/19
+      # Black player_id is now updating when a player joins a game
+        # Added 'update_player_id' method to the piece model that finds pieces 
+        # that are nil and belong to the current_game and then updates that player_id
+        # with the current_user. (↓↓↓)
+  def self.update_player_id(user, current_game)
+    piece = self.where(player_id: nil, game_id: current_game.id).update_all(:player_id => user.id)
+  end
+
 
 ###Created and Updated by Samantha Lee on 9/18/2019
 
