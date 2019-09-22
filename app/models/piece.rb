@@ -192,9 +192,9 @@ def diagonal_block?(x_end, y_end)
     #NE direction slope
     if x_end > self.x_pos && y_end > self.y_pos
       #determines number of times to iterate
-      (x_end + self.x_pos).times do |i|
+      (x_end - self.x_pos).times do |i|
       #if adding 1 to each x and y pos value returns an empty space
-      self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos, +1, +1).empty?
+      self.game.pieces.where(x_pos: self.x_pos + i + 1, y_pos: self.y_pos + i + 1).empty?
     false
 
     #if the endpoint x,y are both less than starting x,y
@@ -203,26 +203,26 @@ def diagonal_block?(x_end, y_end)
       #determines number of times to iterate
       (self.x_pos - x_end).times do |i|
       #if subtracting 1 from each x and y pos value returns an empty space
-      self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos, -1 -1).empty?
+      self.game.pieces.where(x_pos: self.x_pos - i - 1, y_pos: self.y_pos - i - 1).empty?
     false
 
     #if the endpoint x is greater than starting x and endpoint y is less than starting y
     #NW direction slope
     elsif x_end > self.x_pos && y_end < self.y_pos
       #determines number of times to iterate
-      (x_end + self.x_pos).times do |i|
+      (y_end - self.y_pos).times do |i|
       #if adding 1 to x_pos and subtracting 1 to y_pos returns an empty space
-      self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos, +1, -1).empty?
+      self.game.pieces.where(x_pos: self.x_pos + i + 1, y_pos: self.y_pos - i - 1).empty?
     false
 
-    #if the endpoing x is less than starting x and endpoint y is greater than starting y
+    #if the endpoint x is less than starting x and endpoint y is greater than starting y
     #SE direction slope
     else x_end < self.x_pos && y_end > self.y_pos
       #determines number of times to iterate
-      ()
-
-      #test obstruction by subtracting 1 from x and adding 1 to y
-  
+      (x_end - self.x_pos).times do |i|
+      #if subtracting 1 from x_pos and adding 1 to y_pos returns and empty space
+      self.game.pieces.where(x_pos: self.x_pos - i - 1, y_pos: self.y_pos + i + 1).empty?
+    false  
   end
 end
 
