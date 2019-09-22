@@ -162,4 +162,71 @@ end
   end
 
 ### End of Samantha's updates on 9/18/2019
+
+
+### Created by Samantha on 9/22/2019
+
+#test if a move is a valid diagonal move
+def diagonal_move?(x_end, y_end)
+  #define a method for slope
+  slope = (y_end - self.y_pos) / (x_end - self.x_pos)
+  #if slope is equal to 1 or -1, true, it is a diagonal move
+  if slope == 1 || slope == -1
+    true
+  #if slope is not equal to 1 or -1, false, it is not a diagonal move
+  else
+    false
+  end
+end
+
+#test if a valid diagonal path is obstructed
+#if there are pieces on the path, diagonal_block? returns true
+#if the path is clear, diagonal_block? returns false
+def diagonal_block?(x_end, y_end)
+
+  #if the move is a diagonal valid move
+  if diagonal_move? = true
+    #test if there are obstruction pieces on diagonal path
+
+    #if the endpoint x,y are both greater than starting x,y
+    #NE direction slope
+    if x_end > self.x_pos && y_end > self.y_pos
+      #determines number of times to iterate
+      (x_end + self.x_pos).times do |i|
+      #if adding 1 to each x and y pos value returns an empty space
+      self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos, +1, +1).empty?
+    false
+
+    #if the endpoint x,y are both less than starting x,y
+    #SW direction slope
+    elsif x_end < self.x_pos && y_end < self.y_pos
+      #determines number of times to iterate
+      (self.x_pos - x_end).times do |i|
+      #if subtracting 1 from each x and y pos value returns an empty space
+      self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos, -1 -1).empty?
+    false
+
+    #if the endpoint x is greater than starting x and endpoint y is less than starting y
+    #NW direction slope
+    elsif x_end > self.x_pos && y_end < self.y_pos
+      #determines number of times to iterate
+      (x_end + self.x_pos).times do |i|
+      #if adding 1 to x_pos and subtracting 1 to y_pos returns an empty space
+      self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos, +1, -1).empty?
+    false
+
+    #if the endpoing x is less than starting x and endpoint y is greater than starting y
+    #SE direction slope
+    else x_end < self.x_pos && y_end > self.y_pos
+      #determines number of times to iterate
+      ()
+
+      #test obstruction by subtracting 1 from x and adding 1 to y
+  
+  end
+end
+
+end
+
+
 end
