@@ -61,6 +61,15 @@ def piece_exists?(x,y)
   end
 end
 
+#tests for a piece at the given y location on the board
+def y_location?(y)
+  piece = self.game.pieces.where(y_pos: y)
+  if piece.exists?
+    true
+  else
+    false
+  end
+end
 
 #test for empty endpoint and move player if the spot is empty
 def move(x,y)
@@ -111,7 +120,7 @@ end
 
   #private 
 
-###Samantha Lee updated methods from Cooper on 9/18/2019
+###Samantha Lee proposed new horizonal and vertical block methods on 9/24/2019
 
 
   #Check that x axis value changes
@@ -122,42 +131,78 @@ end
     #Right
     if x_axis > self.x_pos
       (x_axis + self.x_pos).times do |i|
-        self.game.pieces.where(x_pos: self.x_pos + i + 1, y_pos: self.y_pos).empty?
+        #if there is no piece found at the given spot
+        if self.game.pieces.where(x_pos: self.x_pos + i + 1, y_pos: self.y_pos).piece_exists? == false
         #return false, there is no horizontal block and piece can move
-        false
+          false
+        #else, if a piece exists at that given spot
+        else
+          true
+        end
       end
     #Left
     else  
       #Will return array
       #Left space check
       (x_axis - self.x_pos).times do |i|
-        self.game.pieces.where(x_pos: self.x_pos - i + 1, y_pos: self.y_pos).empty?
+        if self.game.pieces.where(x_pos: self.x_pos - i + 1, y_pos: self.y_pos).piece.exists? == false
         #return false, there is no horizontal block and piece can move
-        false
+          false
+        #else, if a piece exists at that given spot
+        else
+          true
+        end
       end
     end
   end
 
-  #Checks if there is a piece on the vertical path of a moving piece
-  def vertical_block?(y_axis)
-    #if the y_pos endpoint value is greated than the y vale of the moving piece
-   if y_axis > self.y_pos
-      #test path moving up for pieces
-      (y_axis + self.y_pos).times do |i|
-        self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos + i + 1).empty?
-        #return false, there is no vertical block and piece can move
-        false
-      end
-    #if the y_pos endpoint value is less than the y value of the moving piece
-    else  
-      #Will return array
-      #test path moving down for pieces
-      (y_axis - self.y_pos).times do |i|
-        self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos - i + 1).empty?
-        #return false, there is no vertical block and piece can move
-        false
-      end
+  def horizontal_block2?(x,y)
+    (self.x_pos+1...x+1).each do |y|
+      puts x
     end
+  end
+
+
+
+  #right now this only checks positive
+  #need to add if statement and add a check for negative vertical movement
+  def vertical_block?(x,y)
+    #test for upward vertical movement
+    #if self.y_pos < y
+      #included plus 1 to check the endpoint and the path
+      #example- if start is 4,0 and endpoint is 4,2, this checks 4,1, and 4,2 for pieces
+      (self.y_pos+1...y+1).each do |y|
+        returns true if game.pieces.find_by_y_pos(y).present?
+      end
+        return false
+        #if endpoint.present?
+          #true
+        #else
+          #false
+        #end
+      #end
+        #tests if a piece exists with given y value
+        #if a piece exists, return true
+        #self.game.pieces.y_location?(y)
+          #true
+        #if a piece does not exist, return false
+        #else
+          #false
+        #end
+      #end
+    
+
+    #else
+      #(self.y_pos-1...y).each do |y|
+        #if a piece exists, return true
+        #if self.game.pieces.present?
+          #true
+        #if a piece does not exist, return false
+        #else
+          #false
+        #end
+      #end
+    #end
   end
 
 
