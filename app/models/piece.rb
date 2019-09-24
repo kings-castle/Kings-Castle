@@ -168,13 +168,20 @@ end
   #need to add if statement and add a check for negative vertical movement
   def vertical_block?(x,y)
     #test for upward vertical movement
-    #if self.y_pos < y
+    if self.y_pos < y
       #included plus 1 to check the endpoint and the path
       #example- if start is 4,0 and endpoint is 4,2, this checks 4,1, and 4,2 for pieces
       (self.y_pos+1...y+1).each do |y|
-        returns true if game.pieces.find_by_y_pos(y).present?
+        return true if game.pieces.find_by_y_pos(y).present?
       end
         return false
+    else
+      (self.y_pos-1...y+1).each do |y|
+        puts y
+        return true if game.pieces.find_by_y_pos(y).present? == true
+      end
+        return false
+    end
         #if endpoint.present?
           #true
         #else
