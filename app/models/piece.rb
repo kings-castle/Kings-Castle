@@ -157,8 +157,11 @@ end
   end
 
   def horizontal_block2?(x,y)
-    (self.x_pos+1...x+1).each do |y|
-      puts x
+    if self.x_pos < x
+      (self.x_pos+1...x+1).each do |y|
+        return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
+      end
+        return false
     end
   end
 
