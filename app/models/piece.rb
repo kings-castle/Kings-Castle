@@ -172,44 +172,18 @@ end
       #included plus 1 to check the endpoint and the path
       #example- if start is 4,0 and endpoint is 4,2, this checks 4,1, and 4,2 for pieces
       (self.y_pos+1...y+1).each do |y|
-        return true if game.pieces.find_by_y_pos(y).present?
-      end
-        return false
-    else
-      (self.y_pos-1...y+1).each do |y|
-        puts y
-        return true if game.pieces.find_by_y_pos(y).present? == true
+        return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
       end
         return false
     end
-        #if endpoint.present?
-          #true
-        #else
-          #false
-        #end
-      #end
-        #tests if a piece exists with given y value
-        #if a piece exists, return true
-        #self.game.pieces.y_location?(y)
-          #true
-        #if a piece does not exist, return false
-        #else
-          #false
-        #end
-      #end
     
-
-    #else
-      #(self.y_pos-1...y).each do |y|
-        #if a piece exists, return true
-        #if self.game.pieces.present?
-          #true
-        #if a piece does not exist, return false
-        #else
-          #false
-        #end
-      #end
-    #end
+    #currently this part is not correctly testing for obstructions move negatively on the board
+    if self.y_pos > y
+      (self.y_pos-1...y-1).each do |y|
+        return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
+      end
+        return false
+    end
   end
 
 
