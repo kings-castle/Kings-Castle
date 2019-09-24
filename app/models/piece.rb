@@ -46,13 +46,19 @@ class Piece < ApplicationRecord
   end
 
 
-###Created and Updated by Samantha Lee on 9/18/2019
+###Created by Samantha Lee on 9/18/2019
 
-#allows you to find a test a piece in a game
-#returns array of the piece at the given x,y location
-def find_piece(x,y)
+###Updated by Samantha Lee on 9/24/2019 to return true or false if piece exists
+#allows you to test if a piece exsits at a given location on the board
+#returns true if a piece exists, the space is occupied
+#returns false if a piece does not exist, the space is empty
+def piece_exists?(x,y)
   piece = self.game.pieces.where(x_pos: x, y_pos: y)
-  puts piece
+  if piece.exists?
+    true
+  else
+    false
+  end
 end
 
 
