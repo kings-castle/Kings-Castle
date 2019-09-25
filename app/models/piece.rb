@@ -126,8 +126,8 @@ end
   #returns true if there is a block
   #returns false if there is a block
   #is_obstructed should call this method and check for false instances
-  def horizontal_block2?(x,y)
-    #test for right vertical movement
+  def horizontal_block?(x,y)
+    #test for right horizontal movement
     if self.x_pos < x
       (self.x_pos+1...x+1).each do |x|
         #if a piece at any spot on the path exists, return true
@@ -137,7 +137,7 @@ end
         return false
     end
 
-    #test for left vertical movement
+    #test for left horizontal movement
     if self.x_pos > x
       (x...self.x_pos).each do |x|
         #if a piece at any spot on the path exists, return true
