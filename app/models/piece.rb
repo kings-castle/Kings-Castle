@@ -156,6 +156,7 @@ end
     end
   end
 
+  
   def horizontal_block2?(x,y)
     if self.x_pos < x
       (self.x_pos+1...x+1).each do |y|
@@ -167,24 +168,30 @@ end
 
 
 
-  #right now this only checks positive
-  #need to add if statement and add a check for negative vertical movement
+  #test if there is a vertical block on a moving piece
+  #returns true if there is a block
+  #returns false if there is a block
+  #is_obstructed should call this method and check for false instances
   def vertical_block?(x,y)
     #test for upward vertical movement
     if self.y_pos < y
       #included plus 1 to check the endpoint and the path
       #example- if start is 4,0 and endpoint is 4,2, this checks 4,1, and 4,2 for pieces
       (self.y_pos+1...y+1).each do |y|
+        #if a piece at any spot on the path exists, return true
         return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
       end
+        #if there are no pieces on the path
         return false
     end
     
-    #currently this part is not correctly testing for obstructions move negatively on the board
+    #test for downward vertical movement    
     if self.y_pos > y
       (y...self.y_pos).each do |y|
+        #if a piece at any spot on the path exists, return true
         return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
       end
+        #if there are no pieces on the path
         return false
     end
 
