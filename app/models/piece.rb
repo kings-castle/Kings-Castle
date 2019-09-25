@@ -127,6 +127,7 @@ end
   #returns true if there is a block
   #returns false if there is a block
   #is_obstructed should call this method and check for false instances
+  #each iteration only checks the spaces between the start and end point
   def horizontal_block?(x,y)
     #test for right horizontal movement
     if self.x_pos < x
@@ -153,11 +154,10 @@ end
   #returns true if there is a block
   #returns false if there is a block
   #is_obstructed should call this method and check for false instances
+  #each iteration only checks the spaces between the start and end point
   def vertical_block?(x,y)
     #test for upward vertical movement
     if self.y_pos < y
-      #included plus 1 to check the endpoint and the path
-      #example- if start is 4,0 and endpoint is 4,2, this checks 4,1, and 4,2 for pieces
       (self.y_pos+1...y).each do |y|
         #if a piece at any spot on the path exists, return true
         return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
