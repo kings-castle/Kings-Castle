@@ -9,15 +9,16 @@ class Piece < ApplicationRecord
   self.inheritance_column = :piece_type
 
   #Define is_obstructed? method
-  def is_obstructed?(x_end, y_end)
-
-  #Variable to store possible board move endpoints
-    endpoint = Array.new(8) {Array.new(8, 0)}
-    #Determine if chosen landing space is open
-    #return true if open_space?(x_end, y_end)
-    if self.horizontal_block?(x_end) == false && self.vertical_block?(y_end) == false
+  ### Updated by Samantha 9/25/2019
+  def is_obstructed?(x,y)
+    #calls horizontal and vertical block methods with the endpoint argument
+    #if either horizontal block or vertical block returns false
+    if self.horizontal_block?(x,y) == false || self.vertical_block?(x,y) == false
+      #return false, no obstruction
+      #piece can move/capture
       false
     else
+      #return true, the path is_obstructed and the piece cannot move
       true
     end
   end
@@ -177,17 +178,15 @@ end
 
   end
 
-
   #Similar to find piece method, but this specifically tests for an empty spot
   def open_space?(x_end, y_end)
     #Check if space is open
     self.game.pieces.where(x_pos: x_end, y_pos: y_end).empty?
   end
 
-### End of Samantha's updates on 9/18/2019
-
 
 ### Created by Samantha on 9/22/2019
+### Updated by Samantha on 9/25/2019
 
 #test if a move is a valid diagonal move
 def diagonal_move?(x_end, y_end)
