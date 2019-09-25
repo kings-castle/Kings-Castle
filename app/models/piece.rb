@@ -120,53 +120,33 @@ end
 
   #private 
 
-###Samantha Lee proposed new horizonal and vertical block methods on 9/24/2019
+###Samantha Lee proposed new horizonal and vertical block methods on 9/25/2019
 
-
-  #Check that x axis value changes
-  #Check that y axis value stays same
-  #Check if x ending position is enemy occupied
-  def horizontal_block?(x_axis)
-    #Check if piece is moving left or right
-    #Right
-    if x_axis > self.x_pos
-      (x_axis + self.x_pos).times do |i|
-        #if there is no piece found at the given spot
-        if self.game.pieces.where(x_pos: self.x_pos + i + 1, y_pos: self.y_pos).piece_exists? == false
-        #return false, there is no horizontal block and piece can move
-          false
-        #else, if a piece exists at that given spot
-        else
-          true
-        end
-      end
-    #Left
-    else  
-      #Will return array
-      #Left space check
-      (x_axis - self.x_pos).times do |i|
-        if self.game.pieces.where(x_pos: self.x_pos - i + 1, y_pos: self.y_pos).piece.exists? == false
-        #return false, there is no horizontal block and piece can move
-          false
-        #else, if a piece exists at that given spot
-        else
-          true
-        end
-      end
-    end
-  end
-
-  
+  #test if there is a horizontal block on a moving piece
+  #returns true if there is a block
+  #returns false if there is a block
+  #is_obstructed should call this method and check for false instances
   def horizontal_block2?(x,y)
+    #test for right vertical movement
     if self.x_pos < x
-      (self.x_pos+1...x+1).each do |y|
+      (self.x_pos+1...x+1).each do |x|
+        #if a piece at any spot on the path exists, return true
         return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
       end
+        #if there are no pieces on the path, return false
+        return false
+    end
+
+    #test for left vertical movement
+    if self.x_pos > x
+      (x...self.x_pos).each do |x|
+        #if a piece at any spot on the path exists, return true
+        return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
+      end
+        #if there are no pieces on the path, return false
         return false
     end
   end
-
-
 
   #test if there is a vertical block on a moving piece
   #returns true if there is a block
@@ -181,7 +161,7 @@ end
         #if a piece at any spot on the path exists, return true
         return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
       end
-        #if there are no pieces on the path
+        #if there are no pieces on the path, return false
         return false
     end
     
@@ -191,7 +171,7 @@ end
         #if a piece at any spot on the path exists, return true
         return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
       end
-        #if there are no pieces on the path
+        #if there are no pieces on the path, return false
         return false
     end
 
