@@ -130,7 +130,7 @@ end
   def horizontal_block?(x,y)
     #test for right horizontal movement
     if self.x_pos < x
-      (self.x_pos+1...x+1).each do |x|
+      (self.x_pos+1...x).each do |x|
         #if a piece at any spot on the path exists, return true
         return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
       end
@@ -140,7 +140,7 @@ end
 
     #test for left horizontal movement
     if self.x_pos > x
-      (x...self.x_pos).each do |x|
+      (x+1...self.x_pos).each do |x|
         #if a piece at any spot on the path exists, return true
         return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
       end
@@ -158,7 +158,7 @@ end
     if self.y_pos < y
       #included plus 1 to check the endpoint and the path
       #example- if start is 4,0 and endpoint is 4,2, this checks 4,1, and 4,2 for pieces
-      (self.y_pos+1...y+1).each do |y|
+      (self.y_pos+1...y).each do |y|
         #if a piece at any spot on the path exists, return true
         return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
       end
@@ -168,7 +168,7 @@ end
     
     #test for downward vertical movement    
     if self.y_pos > y
-      (y...self.y_pos).each do |y|
+      (y+1...self.y_pos).each do |y|
         #if a piece at any spot on the path exists, return true
         return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
       end
