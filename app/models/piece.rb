@@ -9,15 +9,16 @@ class Piece < ApplicationRecord
   self.inheritance_column = :piece_type
 
   #Define is_obstructed? method
-  def is_obstructed?(x_end, y_end)
-
-  #Variable to store possible board move endpoints
-    endpoint = Array.new(8) {Array.new(8, 0)}
-    #Determine if chosen landing space is open
-    #return true if open_space?(x_end, y_end)
-    if self.horizontal_block?(x_end) == false && self.vertical_block?(y_end) == false
+  ### Updated by Samantha 9/25/2019
+  def is_obstructed?(x,y)
+    #calls horizontal and vertical block methods with the endpoint argument
+    #if either horizontal block or vertical block returns false
+    if self.horizontal_block?(x,y) == false || self.vertical_block?(x,y) == false
+      #return false, no obstruction
+      #piece can move/capture
       false
     else
+      #return true, the path is_obstructed and the piece cannot move
       true
     end
   end
@@ -46,15 +47,30 @@ class Piece < ApplicationRecord
   end
 
 
-###Created and Updated by Samantha Lee on 9/18/2019
+###Created by Samantha Lee on 9/18/2019
 
-#allows you to find a test a piece in a game
-#returns array of the piece at the given x,y location
-def find_piece(x,y)
+###Updated by Samantha Lee on 9/24/2019 to return true or false if piece exists
+#allows you to test if a piece exsits at a given location on the board
+#returns true if a piece exists, the space is occupied
+#returns false if a piece does not exist, the space is empty
+def piece_exists?(x,y)
   piece = self.game.pieces.where(x_pos: x, y_pos: y)
-  puts piece
+  if piece.exists?
+    true
+  else
+    false
+  end
 end
 
+#tests for a piece at the given y location on the board
+def y_location?(y)
+  piece = self.game.pieces.where(y_pos: y)
+  if piece.exists?
+    true
+  else
+    false
+  end
+end
 
 #test for empty endpoint and move player if the spot is empty
 def move(x,y)
@@ -105,55 +121,62 @@ end
 
   #private 
 
-###Samantha Lee updated methods from Cooper on 9/18/2019
+###Samantha Lee proposed new horizonal and vertical block methods on 9/25/2019
 
+  #test if there is a horizontal block on a moving piece
+  #returns true if there is a block
+  #returns false if there is a block
+  #is_obstructed should call this method and check for false instances
+  #each iteration only checks the spaces between the start and end point
+  def horizontal_block?(x,y)
+    #test for right horizontal movement
+    if self.x_pos < x
+      (self.x_pos+1...x).each do |x|
+        #if a piece at any spot on the path exists, return true
+        return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
+      end
+        #if there are no pieces on the path, return false
+        return false
+    end
 
-  #Check that x axis value changes
-  #Check that y axis value stays same
-  #Check if x ending position is enemy occupied
-  def horizontal_block?(x_axis)
-    #Check if piece is moving left or right
-    #Right
-    if x_axis > self.x_pos
-      (x_axis + self.x_pos).times do |i|
-        self.game.pieces.where(x_pos: self.x_pos + i + 1, y_pos: self.y_pos).empty?
-        #return false, there is no horizontal block and piece can move
-        false
+    #test for left horizontal movement
+    if self.x_pos > x
+      (x+1...self.x_pos).each do |x|
+        #if a piece at any spot on the path exists, return true
+        return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
       end
-    #Left
-    else  
-      #Will return array
-      #Left space check
-      (x_axis - self.x_pos).times do |i|
-        self.game.pieces.where(x_pos: self.x_pos - i + 1, y_pos: self.y_pos).empty?
-        #return false, there is no horizontal block and piece can move
-        false
-      end
+        #if there are no pieces on the path, return false
+        return false
     end
   end
 
-  #Checks if there is a piece on the vertical path of a moving piece
-  def vertical_block?(y_axis)
-    #if the y_pos endpoint value is greated than the y vale of the moving piece
-   if y_axis > self.y_pos
-      #test path moving up for pieces
-      (y_axis + self.y_pos).times do |i|
-        self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos + i + 1).empty?
-        #return false, there is no vertical block and piece can move
-        false
+  #test if there is a vertical block on a moving piece
+  #returns true if there is a block
+  #returns false if there is a block
+  #is_obstructed should call this method and check for false instances
+  #each iteration only checks the spaces between the start and end point
+  def vertical_block?(x,y)
+    #test for upward vertical movement
+    if self.y_pos < y
+      (self.y_pos+1...y).each do |y|
+        #if a piece at any spot on the path exists, return true
+        return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
       end
-    #if the y_pos endpoint value is less than the y value of the moving piece
-    else  
-      #Will return array
-      #test path moving down for pieces
-      (y_axis - self.y_pos).times do |i|
-        self.game.pieces.where(x_pos: self.x_pos, y_pos: self.y_pos - i + 1).empty?
-        #return false, there is no vertical block and piece can move
-        false
-      end
+        #if there are no pieces on the path, return false
+        return false
     end
-  end
+    
+    #test for downward vertical movement    
+    if self.y_pos > y
+      (y+1...self.y_pos).each do |y|
+        #if a piece at any spot on the path exists, return true
+        return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
+      end
+        #if there are no pieces on the path, return false
+        return false
+    end
 
+  end
 
   #Similar to find piece method, but this specifically tests for an empty spot
   def open_space?(x_end, y_end)
@@ -161,5 +184,80 @@ end
     self.game.pieces.where(x_pos: x_end, y_pos: y_end).empty?
   end
 
-### End of Samantha's updates on 9/18/2019
+
+### Created by Samantha on 9/22/2019
+### Updated by Samantha on 9/25/2019
+
+#test if a move is a valid diagonal move
+def diagonal_move?(x_end, y_end)
+  #define a method for slope
+  slope = (y_end - self.y_pos) / (x_end - self.x_pos)
+  #if slope is equal to 1 or -1, true, it is a diagonal move
+  if slope == 1 || slope == -1
+    true
+  #if slope is not equal to 1 or -1, false, it is not a diagonal move
+  else
+    false
+  end
+end
+
+#test if a valid diagonal path is obstructed
+#if there are pieces on the path, diagonal_block? returns true
+#if the path is clear, diagonal_block? returns false
+def diagonal_block?(x_end, y_end)
+
+  #if the move is a diagonal valid move
+  if diagonal_move?(x_end, y_end) == true
+    #test if there are obstruction pieces on diagonal path
+
+    #if the endpoint x,y are both greater than starting x,y
+    #NE direction slope
+    if x_end > self.x_pos && y_end > self.y_pos
+      #determines number of times to iterate
+      (x_end - self.x_pos).times do |i|
+      #if adding 1 to each x and y pos value returns an empty space
+      self.game.pieces.where(x_pos: self.x_pos + i + 1, y_pos: self.y_pos + i + 1).empty?
+      false
+      end
+
+    #if the endpoint x,y are both less than starting x,y
+    #SW direction slope
+    elsif x_end < self.x_pos && y_end < self.y_pos
+      #determines number of times to iterate
+      (self.x_pos - x_end).times do |i|
+      #if subtracting 1 from each x and y pos value returns an empty space
+      self.game.pieces.where(x_pos: self.x_pos - i - 1, y_pos: self.y_pos - i - 1).empty?
+      false
+      end
+
+    #if the endpoint x is greater than starting x and endpoint y is less than starting y
+    #NW direction slope
+    elsif x_end > self.x_pos && y_end < self.y_pos
+      #determines number of times to iterate
+      (y_end - self.y_pos).times do |i|
+      #if adding 1 to x_pos and subtracting 1 to y_pos returns an empty space
+      self.game.pieces.where(x_pos: self.x_pos + i + 1, y_pos: self.y_pos - i - 1).empty?
+      false
+      end
+
+    #if the endpoint x is less than starting x and endpoint y is greater than starting y
+    #SE direction slope
+    else x_end < self.x_pos && y_end > self.y_pos
+      #determines number of times to iterate
+      (x_end - self.x_pos).times do |i|
+      #if subtracting 1 from x_pos and adding 1 to y_pos returns and empty space
+      self.game.pieces.where(x_pos: self.x_pos - i - 1, y_pos: self.y_pos + i + 1).empty?
+      false
+      end 
+
+  end
+
+    #if diagonal_move? = false
+    else
+      puts "That is not a diagonal move"
+end
+
+end
+
+
 end
