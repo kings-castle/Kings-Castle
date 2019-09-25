@@ -182,11 +182,12 @@ end
     
     #currently this part is not correctly testing for obstructions move negatively on the board
     if self.y_pos > y
-      (self.y_pos-1...y-1).each do |y|
+      (y...self.y_pos).each do |y|
         return true if game.pieces.find_by_x_pos_and_y_pos(x,y).present?
       end
         return false
     end
+
   end
 
 
