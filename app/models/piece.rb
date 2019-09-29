@@ -13,7 +13,7 @@ class Piece < ApplicationRecord
   def is_obstructed?(x,y)
     #calls horizontal and vertical block methods with the endpoint argument
     #if either horizontal block or vertical block returns false
-    if self.horizontal_block?(x,y) == false || self.vertical_block?(x,y) == false
+    if self.horizontal_block?(x,y) == false || self.vertical_block?(x,y) == false || self.diagonal_block?(x,y) == false
       #return false, no obstruction
       #piece can move/capture
       false
@@ -22,6 +22,7 @@ class Piece < ApplicationRecord
       true
     end
   end
+
 
   def self.piece_types
     %w(Pawn Rook Knight Bishop Queen King)
@@ -201,63 +202,74 @@ def diagonal_move?(x_end, y_end)
   end
 end
 
-#test if a valid diagonal path is obstructed
-#if there are pieces on the path, diagonal_block? returns true
-#if the path is clear, diagonal_block? returns false
-def diagonal_block?(x_end, y_end)
 
-  #if the move is a diagonal valid move
-  if diagonal_move?(x_end, y_end) == true
-    #test if there are obstruction pieces on diagonal path
+### Created by Samantha on 9/29/2019
+#checks for obstruction on diagonal moving path
+#does not check for obstruction of endpoint
+def diagonal_block?(x,y)
+  #if the movement is a valid diagonal move
+  if diagonal_move?(x, y) == true
 
-    #if the endpoint x,y are both greater than starting x,y
-    #NE direction slope
-    if x_end > self.x_pos && y_end > self.y_pos
-      #determines number of times to iterate
-      (x_end - self.x_pos).times do |i|
-      #if adding 1 to each x and y pos value returns an empty space
-      self.game.pieces.where(x_pos: self.x_pos + i + 1, y_pos: self.y_pos + i + 1).empty?
-      false
+  #if the endpoint x,y are both greater than starting x,y
+  #NE direction slope
+  if x > self.x_pos && y > self.y_pos
+    y_pos = (self.y_pos + 1)
+    ((self.x_pos + 1)...x).each do |x|
+      if game.pieces.find_by_x_pos_and_y_pos(x,y_pos).present? == false
+        y_pos += 1
+      else
+        return true
       end
+    end
+    return false
 
-    #if the endpoint x,y are both less than starting x,y
-    #SW direction slope
-    elsif x_end < self.x_pos && y_end < self.y_pos
-      #determines number of times to iterate
-      (self.x_pos - x_end).times do |i|
-      #if subtracting 1 from each x and y pos value returns an empty space
-      self.game.pieces.where(x_pos: self.x_pos - i - 1, y_pos: self.y_pos - i - 1).empty?
-      false
+  #if the endpoint x is greater than starting x and endpoint y is less than starting y
+  #NW direction slope
+  elsif x > self.x_pos && y < self.y_pos
+    y_pos = (self.y_pos - 1)
+      ((self.x_pos + 1)...x).each do |x|
+        if game.pieces.find_by_x_pos_and_y_pos(x,y_pos).present? == false
+          y_pos -= 1
+        else
+          return true
+        end
       end
+      return false
 
-    #if the endpoint x is greater than starting x and endpoint y is less than starting y
-    #NW direction slope
-    elsif x_end > self.x_pos && y_end < self.y_pos
-      #determines number of times to iterate
-      (y_end - self.y_pos).times do |i|
-      #if adding 1 to x_pos and subtracting 1 to y_pos returns an empty space
-      self.game.pieces.where(x_pos: self.x_pos + i + 1, y_pos: self.y_pos - i - 1).empty?
-      false
+  #if the endpoint x,y are both less than starting x,y
+  #SW direction slope
+  #not loading pieces to check
+  elsif x < self.x_pos && y < self.y_pos
+    y_pos = (self.y_pos - 1)
+      (x + 1...(self.x_pos)).each do |x|
+        if game.pieces.find_by_x_pos_and_y_pos(x,y_pos).present? == false
+          y_pos -= 1
+        else
+          return true
+        end
       end
+      return false
 
-    #if the endpoint x is less than starting x and endpoint y is greater than starting y
-    #SE direction slope
-    else x_end < self.x_pos && y_end > self.y_pos
-      #determines number of times to iterate
-      (x_end - self.x_pos).times do |i|
-      #if subtracting 1 from x_pos and adding 1 to y_pos returns and empty space
-      self.game.pieces.where(x_pos: self.x_pos - i - 1, y_pos: self.y_pos + i + 1).empty?
-      false
-      end 
+  #if the endpoint x is less than starting x and endpoint y is greater than starting y
+  #SE direction slope
+  else x < self.x_pos && y > self.y_pos
+    y_pos = (self.y_pos + 1)
+      (x + 1 ...(self.x_pos)).each do |x|
+        if game.pieces.find_by_x_pos_and_y_pos(x,y_pos).present? == false
+          y_pos += 1
+        else
+          return true
+        end
+      end
+      return false
+  end
 
   end
 
-    #if diagonal_move? = false
-    else
-      puts "That is not a diagonal move"
+  if diagonal_move?(x, y) == false
+    puts "that is not a diagonal move"
+  end
 end
-
-end
-
+  
 
 end
