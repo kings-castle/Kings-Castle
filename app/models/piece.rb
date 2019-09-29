@@ -13,7 +13,7 @@ class Piece < ApplicationRecord
   def is_obstructed?(x,y)
     #calls horizontal and vertical block methods with the endpoint argument
     #if either horizontal block or vertical block returns false
-    if self.horizontal_block?(x,y) == false || self.vertical_block?(x,y) == false
+    if self.horizontal_block?(x,y) == false || self.vertical_block?(x,y) == false || self.diagonal_block?(x,y) == false
       #return false, no obstruction
       #piece can move/capture
       false
@@ -22,6 +22,7 @@ class Piece < ApplicationRecord
       true
     end
   end
+
 
   def self.piece_types
     %w(Pawn Rook Knight Bishop Queen King)
