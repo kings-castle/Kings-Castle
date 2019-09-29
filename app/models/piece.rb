@@ -202,10 +202,10 @@ def diagonal_move?(x_end, y_end)
 end
 
 
-
+### Created by Samantha on 9/29/2019
 #checks for obstruction on diagonal moving path
 #does not check for obstruction of endpoint
-def diagonal_block2?(x,y)
+def diagonal_block?(x,y)
   #if the movement is a valid diagonal move
   if diagonal_move?(x, y) == true
 
@@ -240,52 +240,35 @@ def diagonal_block2?(x,y)
   #not loading pieces to check
   elsif x < self.x_pos && y < self.y_pos
     y_pos = (self.y_pos - 1)
-    (x + 1...(self.x_pos)).each do |x|
-      if game.pieces.find_by_x_pos_and_y_pos(x,y_pos).present? == false
-        y_pos -= 1
-      else
-        return true
+      (x + 1...(self.x_pos)).each do |x|
+        if game.pieces.find_by_x_pos_and_y_pos(x,y_pos).present? == false
+          y_pos -= 1
+        else
+          return true
+        end
       end
-    end
-    return false
+      return false
 
-
-
+  #if the endpoint x is less than starting x and endpoint y is greater than starting y
+  #SE direction slope
+  else x < self.x_pos && y > self.y_pos
+    y_pos = (self.y_pos + 1)
+      (x + 1 ...(self.x_pos)).each do |x|
+        if game.pieces.find_by_x_pos_and_y_pos(x,y_pos).present? == false
+          y_pos += 1
+        else
+          return true
+        end
+      end
+      return false
+  end
 
   end
-  end
 
+  if diagonal_move?(x, y) == false
+    puts "that is not a diagonal move"
+  end
 end
-
-
-#def diagonal_block?(x_end, y_end)
-
-   
-      #determines number of times to iterate
-      #(y_end - self.y_pos).times do |i|
-      #if adding 1 to x_pos and subtracting 1 to y_pos returns an empty space
-      #self.game.pieces.where(x_pos: self.x_pos + i + 1, y_pos: self.y_pos - i - 1).empty?
-      #false
-      #end
-
-    #if the endpoint x is less than starting x and endpoint y is greater than starting y
-    #SE direction slope
-    #else x_end < self.x_pos && y_end > self.y_pos
-      #determines number of times to iterate
-      #(x_end - self.x_pos).times do |i|
-      #if subtracting 1 from x_pos and adding 1 to y_pos returns and empty space
-      #self.game.pieces.where(x_pos: self.x_pos - i - 1, y_pos: self.y_pos + i + 1).empty?
-      #false
-      #end 
-
-  #end
-
-    #if diagonal_move? = false
-    #else
-      #puts "That is not a diagonal move"
-#end
-
-#end
-
+  
 
 end
