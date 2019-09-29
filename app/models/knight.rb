@@ -16,14 +16,14 @@ class Knight < Piece
 
   def valid_move?(x, y)
     if  
-      x = self.x_pos + 1 && y = self.y_pos + 2 ||
-      x = self.x_pos + 1 && y = self.y_pos - 2 ||
-      x = self.x_pos + 2 && y = self.y_pos + 1 ||
-      x = self.x_pos + 2 && y = self.y_pos - 1 ||
-      x = self.x_pos - 1 && y = self.y_pos + 2 ||
-      x = self.x_pos - 1 && y = self.y_pos - 2 ||
-      x = self.x_pos - 2 && y = self.y_pos - 1 ||
-      x = self.x_pos - 2 && y = self.y_pos + 1
+      x == (self.x_pos + 1) && y == (self.y_pos + 2) ||
+      x == (self.x_pos + 1) && y == (self.y_pos - 2) ||
+      x == (self.x_pos + 2) && y == (self.y_pos + 1) ||
+      x == (self.x_pos + 2) && y == (self.y_pos - 1) ||
+      x == (self.x_pos - 1) && y == (self.y_pos + 2) ||
+      x == (self.x_pos - 1) && y == (self.y_pos - 2) ||
+      x == (self.x_pos - 2) && y == (self.y_pos - 1) ||
+      x == (self.x_pos - 2) && y == (self.y_pos + 1)
 
         true
       else
