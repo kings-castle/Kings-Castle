@@ -93,7 +93,7 @@ end
 #returns error if the player_ids are the same
 def capture(x,y)
   #if is_obstructed method is false, meaning there are no pieces in the moving path
-  if is_obstructed?(x,y) == false
+  if is_obstructed?(x,y) == false && valid_move?(x,y) == true
   #locates piece at endpoint
   endpoint = self.game.pieces.find_by_x_pos_and_y_pos(x,y)
   #tests accurate location and access to object
