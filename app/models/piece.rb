@@ -201,6 +201,22 @@ def diagonal_move?(x_end, y_end)
   end
 end
 
+
+
+def diagonal_block2?(x,y)
+  #NW Movement
+  y_pos = (self.y_pos + 1)
+  ((self.x_pos + 1)...x +1).each do |x|
+    if game.pieces.find_by_x_pos_and_y_pos(x,y_pos).present? == false
+      y_pos += 1
+    else
+      return true
+    end
+  end
+  return false
+end
+
+
 #test if a valid diagonal path is obstructed
 #if there are pieces on the path, diagonal_block? returns true
 #if the path is clear, diagonal_block? returns false
